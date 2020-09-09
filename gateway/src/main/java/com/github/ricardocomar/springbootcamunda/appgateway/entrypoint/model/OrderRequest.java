@@ -12,7 +12,6 @@ public class OrderRequest {
 
     public CreditCard card;
 
-
     @Data
     public class CreditCard {
 
@@ -23,5 +22,5 @@ public class OrderRequest {
         String expirity;
 
         String ccv;
-    } 
+    }
 }

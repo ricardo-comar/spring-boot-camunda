@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<logback.contrib.version>0.1.5</logback.contrib.version>
+		<org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
 	</properties>
 
 	<dependencies>
@@ -50,7 +51,7 @@
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
-			<version>1.3.1.Final</version>
+			<version>${org.mapstruct.version}</version>
 		</dependency>
 
 		<dependency>
@@ -175,12 +176,18 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<generatedSourcesDirectory>${project.build.directory}/generated-sources</generatedSourcesDirectory>
+					<generatedTestSourcesDirectory>${project.build.directory}/generated-test-sources</generatedTestSourcesDirectory>
 					<annotationProcessorPaths>
-						<path>
+					 <annotationProcessorPath>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${org.mapstruct.version}</version>
+					 </annotationProcessorPath>
+						<annotationProcessorPath>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 							<version>${lombok.version}</version>
-						</path>
+						</annotationProcessorPath>
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>

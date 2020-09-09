@@ -1,7 +1,19 @@
 
-http://localhost:8080/v2/api-docs
-http://localhost:8080/swagger-ui/
+http://localhost:8081/v2/api-docs
+http://localhost:8081/swagger-ui/
 
+
+http://localhost:80/engine-rest
+
+
+
+
+
+
+
+
+
+https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
 
 https://medium.com/@tushar0618/docker-compose-to-run-and-connect-camunda-and-mysql-containers-2ac396a07d99
 https://camunda.com/download/modeler/

@@ -1,0 +1,165 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Spring Boot Camunda",
+		"_postman_id": "ef426cc4-5cac-2203-b042-1939ae002fea",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Order Process",
+			"request": {
+				"url": "http://localhost:80/engine-rest/process-definition/key/Order_Process/submit-form",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"variables\": {\n    \"id\": {\"value\":\"test_id\",\"type\":\"String\"},\n    \"value\":{\"value\":\"100\",\"type\":\"String\"}\n  }\n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Process Instance",
+			"request": {
+				"url": "http://localhost/engine-rest/process-instance/6a667b7f-f22e-11ea-b992-0242ac120004",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Order Active Query",
+			"request": {
+				"url": {
+					"raw": "http://localhost:80/engine-rest/task/?processInstanceId=6a667b7f-f22e-11ea-b992-0242ac120004",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"engine-rest",
+						"task",
+						""
+					],
+					"query": [
+						{
+							"key": "processInstanceId",
+							"value": "6a667b7f-f22e-11ea-b992-0242ac120004",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"variables\": {\n    \"id\": {\"value\":\"test_id\",\"type\":\"String\"},\n    \"value\":{\"value\":\"100\",\"type\":\"String\"}\n  }\n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Order Query",
+			"request": {
+				"url": {
+					"raw": "http://localhost:80/engine-rest/history/process-instance?processInstanceId=6a667b7f-f22e-11ea-b992-0242ac120004",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"engine-rest",
+						"history",
+						"process-instance"
+					],
+					"query": [
+						{
+							"key": "processInstanceId",
+							"value": "6a667b7f-f22e-11ea-b992-0242ac120004",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"variables\": {\n    \"id\": {\"value\":\"test_id\",\"type\":\"String\"},\n    \"value\":{\"value\":\"100\",\"type\":\"String\"}\n  }\n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Order Variables",
+			"request": {
+				"url": {
+					"raw": "http://localhost:80/engine-rest/history/variable-instance?processInstanceId=44bc958c-f226-11ea-b992-0242ac120004",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"engine-rest",
+						"history",
+						"variable-instance"
+					],
+					"query": [
+						{
+							"key": "processInstanceId",
+							"value": "44bc958c-f226-11ea-b992-0242ac120004",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"variables\": {\n    \"id\": {\"value\":\"test_id\",\"type\":\"String\"},\n    \"value\":{\"value\":\"100\",\"type\":\"String\"}\n  }\n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

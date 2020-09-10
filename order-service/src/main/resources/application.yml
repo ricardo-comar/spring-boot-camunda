@@ -1,0 +1,30 @@
+spring:
+  cloud:
+    discovery:
+      enabled: false
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    generate-ddl: true
+    hibernate.ddl-auto: create-drop
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/process-engine
+    username: camunda
+    password: camunda
+
+server:
+  port: 8086
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+      camunda-engine:
+        url: http://localhost/engine-rest

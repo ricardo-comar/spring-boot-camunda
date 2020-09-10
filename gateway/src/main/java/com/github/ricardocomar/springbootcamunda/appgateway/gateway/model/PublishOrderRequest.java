@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class SendOrderRequest {
+public class PublishOrderRequest {
     
     private Map<String, Variable> variables;
 

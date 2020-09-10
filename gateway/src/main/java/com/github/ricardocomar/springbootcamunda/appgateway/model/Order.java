@@ -7,6 +7,8 @@ import lombok.Data;
 @Builder
 public class Order {
 
+    public String id;
+
     public String name;
 
     public Double value;

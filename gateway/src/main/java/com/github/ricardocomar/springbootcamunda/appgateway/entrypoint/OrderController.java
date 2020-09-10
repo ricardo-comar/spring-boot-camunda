@@ -4,7 +4,7 @@ import com.github.ricardocomar.springbootcamunda.appgateway.entrypoint.model.Ord
 import com.github.ricardocomar.springbootcamunda.appgateway.mapper.OrderMapper;
 import com.github.ricardocomar.springbootcamunda.appgateway.model.Order;
 import com.github.ricardocomar.springbootcamunda.appgateway.model.Process;
-import com.github.ricardocomar.springbootcamunda.appgateway.usecase.CreateOrderUseCase;
+import com.github.ricardocomar.springbootcamunda.appgateway.usecase.PublishOrderUseCase;
 import com.github.ricardocomar.springbootcamunda.appgateway.validator.OrderRequestValidator;
 import com.github.ricardocomar.springbootcamunda.appgateway.validator.OrderValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class OrderController {
     private OrderMapper mapper;
 
     @Autowired 
-    private CreateOrderUseCase createOrder;
+    private PublishOrderUseCase createOrder;
 
     @PostMapping(path = "/order/publish")
     public ResponseEntity<?> publishOrder(@RequestBody(required = true) final OrderRequest body) {

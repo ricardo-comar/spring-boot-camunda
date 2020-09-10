@@ -15,3 +15,5 @@ feign:
         loggerLevel: basic
       camunda-engine:
         url: http://localhost/engine-rest
+      order-service:
+        url: http://localhost:8086

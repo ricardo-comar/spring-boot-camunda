@@ -4,4 +4,14 @@ spring:
       enabled: false
 
 server:
-  port: 8081
+  port: 8085
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+      camunda-engine:
+        url: http://localhost/engine-rest

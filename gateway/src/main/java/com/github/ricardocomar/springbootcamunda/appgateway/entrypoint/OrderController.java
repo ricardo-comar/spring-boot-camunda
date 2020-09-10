@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 /**
  * PublishController
  */
-@RestController("/order")
+@RestController
 @AllArgsConstructor
 public class OrderController {
 
@@ -33,7 +33,7 @@ public class OrderController {
     @Autowired 
     private CreateOrderUseCase createOrder;
 
-    @PostMapping(path = "/publish")
+    @PostMapping(path = "/order/publish")
     public ResponseEntity<?> publishOrder(@RequestBody(required = true) final OrderRequest body) {
 
         ValidationResult validation = validator.validate(body);

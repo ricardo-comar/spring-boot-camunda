@@ -8,12 +8,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CreateOrderUseCase {
-    
+
     @Autowired
     private CamundaGateway gateway;
 
     public Process sendOrder(Order order) {
 
-     return Process.builder().processId("processId").build();   
+        
+
+        Process response = gateway.sendOrder(order);
+
+        return response;
     }
 }

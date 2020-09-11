@@ -22,8 +22,8 @@ public class OrderRequestValidator extends AbstractValidator<OrderRequest> {
     @Override
     public void rules() {
 
-        ruleFor("order.name", OrderRequest::getName).must(not(stringEmptyOrNull()))
-                .withMessage("Order name is mandatory").critical();
+        ruleFor("order.name", OrderRequest::getCustomer).must(not(stringEmptyOrNull()))
+                .withMessage("Order customer is mandatory").critical();
 
         ruleFor("order.value", OrderRequest::getValue).must(greaterThan(0.0))
                 .withMessage("Order value is mandatory and must be positive").critical();

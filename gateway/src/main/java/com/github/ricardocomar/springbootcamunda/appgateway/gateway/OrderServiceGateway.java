@@ -22,7 +22,7 @@ public class OrderServiceGateway {
         OrderRequest request = mapper.fromOrder(order);
         OrderResponse response = orderServiceClient.saveOrder(request);
 
-        Order orderCreated = mapper.fromResponse(response);
+        Order orderCreated = order.withOrderId(response.getOrderId());
         return orderCreated;
     }
 

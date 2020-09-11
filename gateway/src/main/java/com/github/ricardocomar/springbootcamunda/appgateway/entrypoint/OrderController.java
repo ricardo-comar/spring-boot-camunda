@@ -1,12 +1,13 @@
 package com.github.ricardocomar.springbootcamunda.appgateway.entrypoint;
 
 import com.github.ricardocomar.springbootcamunda.appgateway.entrypoint.model.OrderRequest;
-import com.github.ricardocomar.springbootcamunda.appgateway.mapper.OrderMapper;
+import com.github.ricardocomar.springbootcamunda.appgateway.mapper.CreateOrderMapper;
 import com.github.ricardocomar.springbootcamunda.appgateway.model.Order;
-import com.github.ricardocomar.springbootcamunda.appgateway.model.Process;
 import com.github.ricardocomar.springbootcamunda.appgateway.usecase.PublishOrderUseCase;
 import com.github.ricardocomar.springbootcamunda.appgateway.validator.OrderRequestValidator;
 import com.github.ricardocomar.springbootcamunda.appgateway.validator.OrderValidationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,17 +25,21 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class OrderController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
+
     @Autowired
     private OrderRequestValidator validator;
 
-    @Autowired 
-    private OrderMapper mapper;
+    @Autowired
+    private CreateOrderMapper mapper;
 
-    @Autowired 
+    @Autowired
     private PublishOrderUseCase createOrder;
 
     @PostMapping(path = "/order/publish")
     public ResponseEntity<?> publishOrder(@RequestBody(required = true) final OrderRequest body) {
+
+        LOGGER.info("Order received for customer {}", body.getCustomer());
 
         ValidationResult validation = validator.validate(body);
         if (!validation.isValid()) {
@@ -42,9 +47,8 @@ public class OrderController {
         }
 
         Order order = mapper.fromRequest(body);
+        Order orderSaved = createOrder.sendOrder(order);
 
-        Process orderProcess = createOrder.sendOrder(order);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderProcess);
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderSaved);
     }
 }

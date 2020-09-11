@@ -1,31 +1,12 @@
 package com.github.ricardocomar.springbootcamunda.appgateway.gateway.model;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class OrderResponse {
 
-    public String id;
-
-    public String name;
-
-    public Double value;
-
-    public CreditCard card;
-
-    @Data
-    @Builder
-    public static class CreditCard {
-
-        String name;
-
-        String number;
-
-        String expirity;
-
-        String ccv;
-    }
+    private String orderId;
 
 }

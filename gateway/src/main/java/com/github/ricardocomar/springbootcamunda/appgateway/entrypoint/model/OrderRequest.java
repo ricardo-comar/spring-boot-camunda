@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class OrderRequest {
 
-    public String name;
+    public String customer;
 
     public Double value;
 

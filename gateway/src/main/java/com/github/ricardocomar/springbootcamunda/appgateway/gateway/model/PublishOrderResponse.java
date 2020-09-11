@@ -1,10 +1,10 @@
 package com.github.ricardocomar.springbootcamunda.appgateway.gateway.model;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class PublishOrderResponse {
     
     private String id;

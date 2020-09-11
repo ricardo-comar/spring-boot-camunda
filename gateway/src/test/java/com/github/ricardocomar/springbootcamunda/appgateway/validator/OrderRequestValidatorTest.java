@@ -4,12 +4,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-
-import com.github.ricardocomar.springbootcamunda.appgateway.entrypoint.model.OrderRequest;
-
+import static org.hamcrest.Matchers.not;import com.github.ricardocomar.springbootcamunda.appgateway.entrypoint.model.OrderRequest;
 import org.junit.Test;
-
 import br.com.fluentvalidator.context.ValidationResult;
 
 public class OrderRequestValidatorTest {
@@ -29,7 +25,7 @@ public class OrderRequestValidatorTest {
     public void testCardEmpty() {
 
         OrderRequest order = new OrderRequest();
-        order.setName("John Snow");
+        order.setCustomer("John Snow");
         order.setValue(123.0);
         order.setCard(order. new CreditCard());
 
@@ -42,7 +38,7 @@ public class OrderRequestValidatorTest {
     public void testValid() {
 
         OrderRequest order = new OrderRequest();
-        order.setName("John Snow");
+        order.setCustomer("John Snow");
         order.setValue(123.0);
         order.setCard(order. new CreditCard());
         order.getCard().setCcv("ccv");

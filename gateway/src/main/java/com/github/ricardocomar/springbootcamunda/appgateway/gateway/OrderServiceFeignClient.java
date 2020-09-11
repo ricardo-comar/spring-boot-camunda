@@ -34,7 +34,7 @@ public interface OrderServiceFeignClient {
                     // what you want to answer back (logger, exception catch by a
                     // ControllerAdvice,
                     // etc)
-                    return OrderResponse.builder().build();
+                    return new OrderResponse();
                 }
             };
         }

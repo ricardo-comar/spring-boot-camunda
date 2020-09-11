@@ -7,25 +7,23 @@ import lombok.Data;
 @Builder
 public class OrderRequest {
 
-    public String id;
+    private String customer;
 
-    public String name;
+    private Double value;
 
-    public Double value;
-
-    public CreditCard card;
+    private CreditCard card;
 
     @Data
     @Builder
     public static class CreditCard {
 
-        String name;
+        private String name;
 
-        String number;
+        private String number;
 
-        String expirity;
+        private String expirity;
 
-        String ccv;
+        private String ccv;
     }
 
 }

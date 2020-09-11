@@ -19,7 +19,7 @@ public class CamundaGateway {
     public Process sendOrder(Order order) {
 
         Map<String, PublishOrderRequest.Variable> variables = new HashMap<String, PublishOrderRequest.Variable>();
-        variables.put("orderId", new PublishOrderRequest.Variable(order.getId(), "String"));
+        variables.put("orderId", new PublishOrderRequest.Variable(order.getOrderId(), "String"));
         variables.put("value", new PublishOrderRequest.Variable(order.getValue(), "String"));
         PublishOrderRequest request = PublishOrderRequest.builder().variables(variables).build();
 

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: app-gateway
   cloud:
     discovery:
       enabled: false

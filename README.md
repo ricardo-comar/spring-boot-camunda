@@ -7,7 +7,7 @@ http://localhost:80/engine-rest
 
 
 
-
+- Splunk - add TCP Input
 
 
 https://dzone.com/articles/spring-boot-and-postgresql

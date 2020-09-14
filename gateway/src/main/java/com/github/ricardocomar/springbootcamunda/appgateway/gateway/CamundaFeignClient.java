@@ -34,7 +34,7 @@ public interface CamundaFeignClient {
                     // what you want to answer back (logger, exception catch by a
                     // ControllerAdvice,
                     // etc)
-                    return PublishOrderResponse.builder().build();
+                    return new PublishOrderResponse();
                 }
             };
         }

@@ -1,4 +1,3 @@
-
 package com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.model;
 
 import lombok.AllArgsConstructor;
@@ -8,12 +7,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateOrderRequest {
+public class CreateOrderCreditCard {
 
-    public String customer;
+    String name;
 
-    public Double value;
+    String number;
 
-    public CreateOrderCreditCard card;
+    String expirity;
+
+    String ccv;
+
 
 }

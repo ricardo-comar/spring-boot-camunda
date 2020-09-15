@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.model.CreateOrderCreditCard;
 import com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.model.CreateOrderRequest;
 import org.junit.Test;
 import br.com.fluentvalidator.context.ValidationResult;
@@ -28,7 +29,7 @@ public class OrderRequestValidatorTest {
         CreateOrderRequest order = new CreateOrderRequest();
         order.setCustomer("John Snow");
         order.setValue(123.0);
-        order.setCard(order. new CreditCard());
+        order.setCard(new CreateOrderCreditCard());
 
         ValidationResult validation = validator.validate(order);
         assertThat(validation.getErrors(), is(not(empty())));
@@ -41,7 +42,7 @@ public class OrderRequestValidatorTest {
         CreateOrderRequest order = new CreateOrderRequest();
         order.setCustomer("John Snow");
         order.setValue(123.0);
-        order.setCard(order. new CreditCard());
+        order.setCard(new CreateOrderCreditCard());
         order.getCard().setCcv("ccv");
         order.getCard().setExpirity("expirity");
         order.getCard().setName("John Snow");

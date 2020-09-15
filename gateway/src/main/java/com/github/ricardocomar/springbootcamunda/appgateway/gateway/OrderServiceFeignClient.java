@@ -1,25 +1,20 @@
 package com.github.ricardocomar.springbootcamunda.appgateway.gateway;
 
-import com.github.ricardocomar.springbootcamunda.appgateway.gateway.model.OrderRequest;
-import com.github.ricardocomar.springbootcamunda.appgateway.gateway.model.OrderResponse;
+import com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.CreateOrderController;
+import com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.model.CreateOrderRequest;
+import com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.model.CreateOrderResponse;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import feign.FeignException;
 import feign.hystrix.FallbackFactory;
 
 @FeignClient(value = "order-service", url = "${feign.client.config.order-service.url}",
         fallbackFactory = OrderServiceFeignClient.FeignClientFallbackFactory.class)
-public interface OrderServiceFeignClient {
-
-    @RequestMapping(method = RequestMethod.POST,
-            value = "/order")
-    OrderResponse saveOrder(OrderRequest request);
+public interface OrderServiceFeignClient extends CreateOrderController {
 
     @Component
-    static class FeignClientFallbackFactory
-            implements FallbackFactory<OrderServiceFeignClient> {
+    static class FeignClientFallbackFactory implements FallbackFactory<OrderServiceFeignClient> {
 
         @Override
         public OrderServiceFeignClient create(Throwable cause) {
@@ -29,12 +24,10 @@ public interface OrderServiceFeignClient {
                     : "";
 
             return new OrderServiceFeignClient() {
+
                 @Override
-                public OrderResponse saveOrder(OrderRequest request) {
-                    // what you want to answer back (logger, exception catch by a
-                    // ControllerAdvice,
-                    // etc)
-                    return new OrderResponse();
+                public ResponseEntity<CreateOrderResponse> publishOrder(CreateOrderRequest body) {
+                    return ResponseEntity.badRequest().body(new CreateOrderResponse());
                 }
             };
         }

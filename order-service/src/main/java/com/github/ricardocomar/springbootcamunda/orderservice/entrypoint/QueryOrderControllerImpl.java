@@ -35,7 +35,7 @@ public class QueryOrderControllerImpl implements QueryOrderController {
         Optional<Order> opOrder = queryOrder.queryOrder(orderId);
 
         if (opOrder.isPresent()) {
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.OK)
                 .body(mapper.fromQuery(opOrder.get()));
         }
 

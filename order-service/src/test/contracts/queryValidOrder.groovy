@@ -8,6 +8,6 @@ Contract.make {
     }
     response {
         body(file("order-valid.json"))
-        status 404 
+        status 200 
     }
 }

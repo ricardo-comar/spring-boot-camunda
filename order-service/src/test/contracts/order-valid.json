@@ -1,0 +1,12 @@
+{
+    "orderId": "a030406b-16b8-4785-9d04-0589fbd088b5",
+    "customer": "John Snow",
+    "value": 123.45,
+    "card": {
+        "name": "JOHN",
+        "number": "1234567890",
+        "expirity": "05/2022",
+        "ccv": "123"
+    },
+    "state": "CREATED"
+}

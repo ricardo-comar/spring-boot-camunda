@@ -8,13 +8,11 @@
       </camunda:properties>
     </bpmn:extensionElements>
     <bpmn:startEvent id="StartEvent_1" name="Order Request">
-      <bpmn:outgoing>Flow_0xqn7me</bpmn:outgoing>
+      <bpmn:outgoing>Flow_10fy6h6</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_0xqn7me" sourceRef="StartEvent_1" targetRef="Activity_15qhq8x" />
     <bpmn:endEvent id="Event_1o4wb53" name="Order Processed">
-      <bpmn:incoming>Flow_0mpt1ys</bpmn:incoming>
+      <bpmn:incoming>Flow_0wbd64g</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0mpt1ys" sourceRef="Activity_15qhq8x" targetRef="Event_1o4wb53" />
     <bpmn:userTask id="Activity_15qhq8x" name="Order Check" camunda:assignee="demo">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -22,19 +20,30 @@
           <camunda:formField id="field_approved" label="Approved" type="boolean" defaultValue="true" />
         </camunda:formData>
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0xqn7me</bpmn:incoming>
-      <bpmn:outgoing>Flow_0mpt1ys</bpmn:outgoing>
+      <bpmn:incoming>Flow_02dzcx0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wbd64g</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0wbd64g" sourceRef="Activity_15qhq8x" targetRef="Event_1o4wb53" />
+    <bpmn:sequenceFlow id="Flow_10fy6h6" sourceRef="StartEvent_1" targetRef="card_validator" />
+    <bpmn:sequenceFlow id="Flow_02dzcx0" sourceRef="card_validator" targetRef="Activity_15qhq8x" />
+    <bpmn:serviceTask id="card_validator" name="Card Validator" camunda:type="external" camunda:topic="cardValidation">
+      <bpmn:incoming>Flow_10fy6h6</bpmn:incoming>
+      <bpmn:outgoing>Flow_02dzcx0</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Order_Process">
-      <bpmndi:BPMNEdge id="Flow_0xqn7me_di" bpmnElement="Flow_0xqn7me">
-        <di:waypoint x="215" y="117" />
-        <di:waypoint x="270" y="117" />
+      <bpmndi:BPMNEdge id="Flow_0wbd64g_di" bpmnElement="Flow_0wbd64g">
+        <di:waypoint x="750" y="117" />
+        <di:waypoint x="812" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0mpt1ys_di" bpmnElement="Flow_0mpt1ys">
-        <di:waypoint x="370" y="117" />
-        <di:waypoint x="432" y="117" />
+      <bpmndi:BPMNEdge id="Flow_10fy6h6_di" bpmnElement="Flow_10fy6h6">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="300" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02dzcx0_di" bpmnElement="Flow_02dzcx0">
+        <di:waypoint x="400" y="117" />
+        <di:waypoint x="650" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
@@ -43,13 +52,16 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1o4wb53_di" bpmnElement="Event_1o4wb53">
-        <dc:Bounds x="432" y="99" width="36" height="36" />
+        <dc:Bounds x="812" y="99" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="408" y="142" width="84" height="14" />
+          <dc:Bounds x="788" y="142" width="84" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0ynbwa7_di" bpmnElement="Activity_15qhq8x">
-        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <dc:Bounds x="650" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1lqmtw4_di" bpmnElement="card_validator">
+        <dc:Bounds x="300" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

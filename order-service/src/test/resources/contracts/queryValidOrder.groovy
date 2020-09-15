@@ -3,14 +3,10 @@ Contract.make {
     description "should return even when number input is even"
     request{
         method GET()
-        url("/validate/prime-number") {
-            queryParameters {
-                parameter("number", "2")
-            }
+        url("/order/449d56c8-c453-4ef1-8d63-29ad241c4b61") {
         }
     }
     response {
-        body("Even")
         status 200
     }
 }

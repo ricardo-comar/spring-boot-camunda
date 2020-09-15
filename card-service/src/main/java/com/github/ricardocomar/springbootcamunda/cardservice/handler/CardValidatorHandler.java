@@ -23,7 +23,7 @@ public class CardValidatorHandler implements ExternalTaskHandler {
         LOGGER.info("Order received: {}", orderId);
 
         Map<String, Object> variables = new HashMap<String, Object>();
-        variables.put("cardValid", Boolean.TRUE);
+        variables.put("cardValid", Boolean.FALSE);
         variables.put("cardValidated", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
 
         externalTaskService.complete(externalTask, variables);

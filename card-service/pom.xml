@@ -15,12 +15,33 @@
 	<description>Demo project for Camunda Integration</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>1.9</java.version>
 		<logback.contrib.version>0.1.5</logback.contrib.version>
 		<org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
 	</properties>
 
 	<dependencies>
+
+        <dependency>
+            <groupId>com.github.ricardo-comar.spring-boot-camunda</groupId>
+            <artifactId>order-service</artifactId>
+            <version>${project.version}</version>
+            <classifier>client</classifier>
+            <exclusions>
+                <exclusion>  
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions> 
+        </dependency>
+        <dependency>
+            <groupId>com.github.ricardo-comar.spring-boot-camunda</groupId>
+            <artifactId>order-service</artifactId>
+            <version>${project.version}</version>
+            <classifier>stubs</classifier>
+            <scope>test</scope>
+        </dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

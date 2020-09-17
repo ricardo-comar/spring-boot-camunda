@@ -1,4 +1,4 @@
-package com.github.ricardocomar.springbootcamunda.orderservice.handler;
+package com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.handler;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;

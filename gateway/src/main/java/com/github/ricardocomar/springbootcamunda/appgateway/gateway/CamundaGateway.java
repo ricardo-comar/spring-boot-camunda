@@ -28,7 +28,7 @@ public class CamundaGateway {
         variables.put("orderId",
                 new PublishOrderRequest.Variable(order.getOrderId(), String.class.getSimpleName()));
         variables.put("value",
-                new PublishOrderRequest.Variable(order.getValue(), String.class.getSimpleName()));
+                new PublishOrderRequest.Variable(order.getValue(), Double.class.getSimpleName()));
         
         PublishOrderRequest request = PublishOrderRequest.builder().variables(variables).build();
 

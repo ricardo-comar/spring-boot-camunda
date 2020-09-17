@@ -28,4 +28,5 @@ https://camunda.com/best-practices/_/
 https://camunda.com/best-practices/handling-data-in-processes/
 
 
+
 https://camunda.com/best-practices/invoking-services-from-the-process/#_understanding_and_using_strong_external_tasks_strong

@@ -6,7 +6,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import feign.FeignException;
 import feign.hystrix.FallbackFactory;
 
 @FeignClient(value = "camunda-engine", url = "${feign.client.config.camunda-engine.url}",
@@ -24,9 +23,9 @@ public interface CamundaFeignClient {
         @Override
         public CamundaFeignClient create(Throwable cause) {
 
-            String httpStatus = cause instanceof FeignException
-                    ? Integer.toString(((FeignException) cause).status())
-                    : "";
+            // String httpStatus = cause instanceof FeignException
+            //         ? Integer.toString(((FeignException) cause).status())
+            //         : "";
 
             return new CamundaFeignClient() {
                 @Override

@@ -6,7 +6,6 @@ import com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.model.C
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import feign.FeignException;
 import feign.hystrix.FallbackFactory;
 
 @FeignClient(value = "order-service", url = "${feign.client.config.order-service.url}",
@@ -19,9 +18,9 @@ public interface OrderServiceFeignClient extends CreateOrderController {
         @Override
         public OrderServiceFeignClient create(Throwable cause) {
 
-            String httpStatus = cause instanceof FeignException
-                    ? Integer.toString(((FeignException) cause).status())
-                    : "";
+            // String httpStatus = cause instanceof FeignException
+            //         ? Integer.toString(((FeignException) cause).status())
+            //         : "";
 
             return new OrderServiceFeignClient() {
 

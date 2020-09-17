@@ -21,8 +21,11 @@ public class OrderServiceGateway {
     public Optional<Order> queryOrder(String orderId) {
 
         ResponseEntity<QueryOrderResponse> response = orderServiceClient.queryOrder(orderId);
+        if (!response.getStatusCode().is2xxSuccessful()) {
+            return Optional.ofNullable(null);
+        }
 
-        return null;
+        return Optional.ofNullable(mapper.fromResponse(response.getBody()));
     }
 
 }

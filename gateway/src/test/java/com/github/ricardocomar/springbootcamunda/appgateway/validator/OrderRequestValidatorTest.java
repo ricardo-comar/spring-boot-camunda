@@ -4,7 +4,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;import com.github.ricardocomar.springbootcamunda.appgateway.entrypoint.model.OrderRequest;
+import static org.hamcrest.Matchers.not;
+import com.github.ricardocomar.springbootcamunda.appgateway.entrypoint.model.OrderRequest;
 import org.junit.Test;
 import br.com.fluentvalidator.context.ValidationResult;
 

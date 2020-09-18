@@ -13,7 +13,7 @@ import feign.hystrix.FallbackFactory;
 public interface CamundaFeignClient {
 
     @RequestMapping(method = RequestMethod.POST,
-            value = "/process-definition/key/Order_Process/submit-form")
+            value = "/process-definition/key/Order_Request/submit-form")
     PublishOrderResponse sendOrder(PublishOrderRequest request);
 
     @Component

@@ -2,11 +2,9 @@ package com.github.ricardocomar.springbootcamunda.mockservice.gateway.mapper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-
 import com.github.ricardocomar.springbootcamunda.mockservice.MockServiceApplication;
 import com.github.ricardocomar.springbootcamunda.mockservice.gateway.entity.ScenarioEntity;
 import com.github.ricardocomar.springbootcamunda.mockservice.model.Scenario;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 import br.com.six2six.fixturefactory.Fixture;

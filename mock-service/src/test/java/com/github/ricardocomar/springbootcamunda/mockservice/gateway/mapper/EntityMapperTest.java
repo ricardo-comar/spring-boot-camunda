@@ -16,17 +16,16 @@ import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 public class EntityMapperTest {
 
     ScenarioEntityMapper mapper = new ScenarioEntityMapperImpl();
-    private Scenario model = Fixture.from(Scenario.class).gimme("valid");
-    private ScenarioEntity entity = Fixture.from(ScenarioEntity.class).gimme("valid");
+    private final Scenario model;
+    private final ScenarioEntity entity;
 
     public EntityMapperTest() {
+        FixtureFactoryLoader.loadTemplates(MockServiceApplication.class.getPackage().getName());
         ReflectionTestUtils.setField(mapper, "variableEntityMapper",
                 new VariableEntityMapperImpl());
-    }
 
-    @BeforeClass
-    public static void beforeClass() {
-        FixtureFactoryLoader.loadTemplates(MockServiceApplication.class.getPackage().getName());
+        model = Fixture.from(Scenario.class).gimme("valid");
+        entity = Fixture.from(ScenarioEntity.class).gimme("valid");
     }
 
     @Test

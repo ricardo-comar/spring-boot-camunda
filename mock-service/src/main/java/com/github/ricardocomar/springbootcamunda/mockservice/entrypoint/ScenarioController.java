@@ -33,24 +33,18 @@ public class ScenarioController {
     @Autowired
     private ScenarioRequestMapper mapper;
 
-    @PostMapping(path = "/service/{topic}/{scenarioId}")
-    public ResponseEntity<?> registerScenario(@PathVariable final String topic,
-            @PathVariable final String scenarioId,
+    @PostMapping(path = "/scenario")
+    public ResponseEntity<?> registerScenario(
             @RequestBody(required = true) final ScenarioRequest request) {
 
-        Optional<Scenario> scenario = queryScenario.queryScenario(topic, scenarioId);
-        if (scenario.isPresent()) {
-            saveScenario.delete(scenario.get().getId());
-        }
+        Scenario scenario = saveScenario.save(mapper.fromRequest(request));
 
-        Scenario newScenario = saveScenario.save(mapper.fromRequest(request, topic, scenarioId));
-
-        LOGGER.info("Scenario {} for topic {} created", scenarioId, topic);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newScenario);
+        LOGGER.info("Scenario {} for topic {} created", request.getScenarioId(), request.getTopicName());
+        return ResponseEntity.status(HttpStatus.CREATED).body(scenario);
 
     }
 
-    @GetMapping(path = "/service/{topic}/{scenarioId}")
+    @GetMapping(path = "/scenario/{topic}/{scenarioId}")
     public ResponseEntity<?> queryScenario(@PathVariable final String topic,
             @PathVariable final String scenarioId) {
 

@@ -1,12 +1,9 @@
 package com.github.ricardocomar.springbootcamunda.mockservice.entrypoint;
 
-import com.github.ricardocomar.springbootcamunda.mockservice.handler.MockServiceHandler;
-import org.camunda.bpm.client.ExternalTaskClient;
-import org.camunda.bpm.client.backoff.ExponentialBackoffStrategy;
+import com.github.ricardocomar.springbootcamunda.mockservice.usecase.RegisterOnTopicUseCase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,27 +16,19 @@ public class ExternalServiceController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ExternalServiceController.class);
 
-    @Value("${camunda.engine.url}")
-    private String engineUrl;
-
     @Autowired
-    private MockServiceHandler handler;
+    private RegisterOnTopicUseCase useCase;
 
     @PostMapping(path = "/service/{topic}")
     public ResponseEntity<?> subscribeTopic(@PathVariable final String topic) {
 
-        if (handler.isTopicRegistred(topic)) {
+        if (useCase.isTopicRegistred(topic)) {
 
             LOGGER.error("Topic {} already registred", topic);
             return ResponseEntity.badRequest().build();
         }
 
-        ExternalTaskClient client = ExternalTaskClient.create().baseUrl(engineUrl)
-                .backoffStrategy(new ExponentialBackoffStrategy(0, 0, 0)).workerId(topic + "Worker")
-                .asyncResponseTimeout(1000).build();
-
-        client.subscribe(topic).handler(handler).open();
-        handler.registerTopic(topic);
+        useCase.registerTopic(topic);
 
         LOGGER.info("Topic {} created", topic);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -49,8 +38,7 @@ public class ExternalServiceController {
     @GetMapping(path = "/service/{topic}")
     public ResponseEntity<?> queryTopic(@PathVariable final String topic) {
 
-        boolean topicRegistred = handler.isTopicRegistred(topic);
-        if (topicRegistred) {
+        if (useCase.isTopicRegistred(topic)) {
 
             LOGGER.info("Topic {} found", topic);
             return ResponseEntity.ok().build();
@@ -58,7 +46,6 @@ public class ExternalServiceController {
 
         LOGGER.warn("Topic {} not found", topic);
         return ResponseEntity.badRequest().build();
-
     }
 
 

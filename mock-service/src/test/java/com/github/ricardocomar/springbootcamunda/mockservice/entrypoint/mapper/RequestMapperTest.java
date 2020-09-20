@@ -31,7 +31,7 @@ public class RequestMapperTest {
     @Test
     public void testRequestToModel() {
         model.setId(null);
-        assertThat(model, equalTo(mapper.fromRequest(request, "mockTopic", "mockScenario")));
+        assertThat(model, equalTo(mapper.fromRequest(request)));
     }
 
 }

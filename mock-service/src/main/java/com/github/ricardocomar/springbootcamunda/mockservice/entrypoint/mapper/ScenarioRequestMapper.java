@@ -7,6 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring", uses = {VariableRequestMapper.class})
 public interface ScenarioRequestMapper {
 
-    public Scenario fromRequest(ScenarioRequest request, String topicName, String scenarioId);
+    public Scenario fromRequest(ScenarioRequest request);
 
 }

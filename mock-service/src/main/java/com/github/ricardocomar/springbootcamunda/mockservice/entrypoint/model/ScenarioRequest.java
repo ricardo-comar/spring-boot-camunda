@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScenarioRequest {
+
+    private String topicName;
+    
+    private String scenarioId;
     
     private List<VariableRequest> variables;
 

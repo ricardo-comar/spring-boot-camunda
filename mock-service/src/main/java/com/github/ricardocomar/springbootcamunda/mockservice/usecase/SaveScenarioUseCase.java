@@ -15,11 +15,8 @@ public class SaveScenarioUseCase {
     @Autowired
     private SaveScenarioGateway saveGateway;
 
-    public void delete(Long id) {
-        removeGateway.remove(id);
-    }
-
     public Scenario save(Scenario scenario) {
+        removeGateway.remove(scenario);
         return saveGateway.save(scenario);
     }
 

@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import com.github.ricardocomar.springbootcamunda.mockservice.model.Scenario;
 import com.github.ricardocomar.springbootcamunda.mockservice.model.Variable;
 import com.github.ricardocomar.springbootcamunda.mockservice.usecase.QueryScenarioUseCase;
+import org.apache.commons.lang3.StringUtils;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
 import org.camunda.bpm.client.task.ExternalTaskService;
@@ -17,6 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import groovy.lang.Binding;
+import groovy.lang.GroovyShell;
 
 @Component
 public class MockServiceHandler implements ExternalTaskHandler {
@@ -71,14 +74,7 @@ public class MockServiceHandler implements ExternalTaskHandler {
         Map<String, Object> errors = new HashMap<>();
         variables.putAll(scenarioOpt.get().getVariables().stream()
                 .collect(Collectors.toMap(Variable::getName, variable -> {
-                    try {
-                        return Class.forName(variable.getClassName()).getConstructor(String.class)
-                                .newInstance(variable.getValue());
-                    } catch (Exception e) {
-                        LOGGER.error("Variable [[[" + variable + "]]] invalid");
-                        errors.put(variable.getName(), e.getMessage());
-                        return e.getMessage();
-                    }
+                    return handleVariable(externalTask, variables, errors, variable);
                 })));
 
         if (!errors.isEmpty()) {
@@ -90,6 +86,36 @@ public class MockServiceHandler implements ExternalTaskHandler {
 
         LOGGER.info("Execution completed with variables [[[{}]]]", variables);
         externalTaskService.complete(externalTask, variables);
+    }
+
+    protected Object handleVariable(ExternalTask externalTask, Map<String, Object> variables,
+            Map<String, Object> errors, Variable variable) {
+        if (StringUtils.isNotEmpty(variable.getGroovyScript())) {
+
+            Binding binding = new Binding();
+            externalTask.getAllVariables().forEach((k, v) -> binding.setProperty(k, v));
+            variables.forEach((k, v) -> binding.setProperty(k, v));
+            GroovyShell shell = new GroovyShell(binding);
+
+            try {
+                return shell.evaluate(variable.getGroovyScript());
+            } catch (Exception e) {
+                LOGGER.error("Variable [[[" + variable + "]]] groovy script invalid");
+                errors.put(variable.getName(), e.getMessage());
+                return e.getMessage();
+            }
+
+        } else {
+            try {
+                return Class.forName(variable.getClassName()).getConstructor(String.class)
+                        .newInstance(variable.getValue());
+            } catch (Exception e) {
+                LOGGER.error("Variable [[[" + variable + "]]] invalid");
+                errors.put(variable.getName(), e.getMessage());
+                return e.getMessage();
+            }
+
+        }
     }
 
 

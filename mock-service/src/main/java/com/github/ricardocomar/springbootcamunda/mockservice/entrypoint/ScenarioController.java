@@ -39,34 +39,15 @@ public class ScenarioController {
             @PathVariable final String scenarioId,
             @RequestBody(required = true) final ScenarioRequest request) {
 
-        if (queryScenario.queryScenario(topic, scenarioId).isPresent()) {
-            LOGGER.error("Scenario {} for topic {} already created", scenarioId, topic);
-            return ResponseEntity.badRequest().build();
+        Optional<Scenario> scenario = queryScenario.queryScenario(topic, scenarioId);
+        if (scenario.isPresent()) {
+            saveScenario.delete(scenario.get().getId());
         }
 
-        Scenario scenario = saveScenario.save(mapper.fromRequest(request, topic, scenarioId));
+        Scenario newScenario = saveScenario.save(mapper.fromRequest(request, topic, scenarioId));
 
         LOGGER.info("Scenario {} for topic {} created", scenarioId, topic);
-        return ResponseEntity.status(HttpStatus.CREATED).body(scenario);
-
-    }
-
-    @PutMapping(path = "/service/{topic}/{scenarioId}")
-    public ResponseEntity<?> updateScenario(@PathVariable final String topic,
-            @PathVariable final String scenarioId,
-            @RequestBody(required = true) final ScenarioRequest request) {
-
-        Optional<Scenario> scenario = queryScenario.queryScenario(topic, scenarioId);
-        if (scenario.isEmpty()) {
-            LOGGER.error("Scenario {} for topic {} not found", scenarioId, topic);
-            return ResponseEntity.badRequest().build();
-        }
-
-        saveScenario.delete(scenario.get().getId());
-        saveScenario.save(mapper.fromRequest(request, topic, scenarioId));
-
-        LOGGER.info("Scenario {} for topic {} updated", scenarioId, topic);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(newScenario);
 
     }
 

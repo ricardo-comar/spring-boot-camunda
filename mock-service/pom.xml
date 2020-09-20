@@ -136,6 +136,11 @@
 			<optional>true</optional>
 		</dependency>
 
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+        </dependency>
+
 
 		<!-- Observability -->
 		<dependency>

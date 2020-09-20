@@ -1,6 +1,7 @@
 package com.github.ricardocomar.springbootcamunda.mockservice.gateway.entity;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,11 +24,14 @@ public class VariableEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     private String value;
 
     private String className;
+
+    private String groovyScript;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private ScenarioEntity scenario;

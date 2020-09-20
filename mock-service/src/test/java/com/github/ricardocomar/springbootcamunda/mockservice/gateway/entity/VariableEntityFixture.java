@@ -29,6 +29,13 @@ public class VariableEntityFixture implements TemplateLoader {
                 add("className", "java.lang.Long");
             }
         });
+        Fixture.of(VariableEntity.class).addTemplate("script", new Rule() {
+            {
+                add("name", "scriptVariable");
+                add("groovyScript", "return ['a', 'b', 'c']");
+            }
+        });
+
     }
 
 }

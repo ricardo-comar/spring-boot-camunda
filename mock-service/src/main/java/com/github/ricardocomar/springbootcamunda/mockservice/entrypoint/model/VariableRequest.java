@@ -14,4 +14,7 @@ public class VariableRequest {
     private String value;
 
     private String className;
+
+    private String groovyScript;
+
 }

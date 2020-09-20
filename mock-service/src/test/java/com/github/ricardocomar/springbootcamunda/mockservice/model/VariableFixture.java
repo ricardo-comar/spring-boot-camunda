@@ -29,6 +29,12 @@ public class VariableFixture implements TemplateLoader {
                 add("className", "java.lang.Long");
             }
         });
+        Fixture.of(Variable.class).addTemplate("script", new Rule() {
+            {
+                add("name", "scriptVariable");
+                add("groovyScript", "return ['a', 'b', 'c']");
+            }
+        });
     }
 
 }

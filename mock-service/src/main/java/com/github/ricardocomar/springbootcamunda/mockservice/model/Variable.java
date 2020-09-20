@@ -17,4 +17,6 @@ public class Variable {
 
     private String className;
 
+    private String groovyScript;
+
 }

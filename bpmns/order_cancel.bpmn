@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_14h29dh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_14h29dh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
   <bpmn:process id="Order_Cancel" isExecutable="true">
-    <bpmn:sequenceFlow id="Flow_0lpa4c8" sourceRef="Event_Cancel_Order" targetRef="Activity_19btk04" />
+    <bpmn:sequenceFlow id="Flow_0lpa4c8" sourceRef="Event_1exoy9r" targetRef="Activity_19btk04" />
     <bpmn:endEvent id="Event_End_Cancel">
       <bpmn:incoming>Flow_0rgy1jy</bpmn:incoming>
     </bpmn:endEvent>
@@ -30,16 +30,20 @@
     <bpmn:serviceTask id="Activity_1igangc" name="Order Reject" camunda:type="external" camunda:topic="orderReject">
       <bpmn:incoming>Flow_0hnrcd2</bpmn:incoming>
       <bpmn:incoming>Flow_1bdfzy3</bpmn:incoming>
+      <bpmn:incoming>Flow_1rg00v0</bpmn:incoming>
       <bpmn:outgoing>Flow_1ngwekj</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:exclusiveGateway id="Gateway_0dz8rrr">
       <bpmn:incoming>Flow_1snzsvl</bpmn:incoming>
       <bpmn:outgoing>Flow_1bdfzy3</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1ciexkp</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_1snzsvl" name="${approved}" sourceRef="Gateway_0g66v5k" targetRef="Gateway_0dz8rrr">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved eq true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1bdfzy3" sourceRef="Gateway_0dz8rrr" targetRef="Activity_1igangc" />
+    <bpmn:sequenceFlow id="Flow_1bdfzy3" name="${!paymentConfirmed}" sourceRef="Gateway_0dz8rrr" targetRef="Activity_1igangc">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!paymentConfirmed}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0ehgm1s" sourceRef="Activity_19btk04" targetRef="Gateway_0g66v5k" />
     <bpmn:userTask id="Activity_19btk04" name="Cancel Check" camunda:assignee="demo">
       <bpmn:extensionElements>
@@ -50,12 +54,21 @@
       <bpmn:incoming>Flow_0lpa4c8</bpmn:incoming>
       <bpmn:outgoing>Flow_0ehgm1s</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:startEvent id="Event_Cancel_Order">
+    <bpmn:sequenceFlow id="Flow_1ciexkp" name="${paymentConfirmed}" sourceRef="Gateway_0dz8rrr" targetRef="Activity_0uhrvm0">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${paymentConfirmed}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="Activity_0uhrvm0" name="Stock Restitution" camunda:type="external" camunda:topic="stockRestitution">
+      <bpmn:incoming>Flow_1ciexkp</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rg00v0</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1rg00v0" sourceRef="Activity_0uhrvm0" targetRef="Activity_1igangc" />
+    <bpmn:startEvent id="Event_1exoy9r">
       <bpmn:outgoing>Flow_0lpa4c8</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_02d5vlg" messageRef="Message_1niuu3y" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0u9dpdt" messageRef="Message_0ljgal1" />
     </bpmn:startEvent>
   </bpmn:process>
   <bpmn:message id="Message_1niuu3y" name="cancelOrderMessage" />
+  <bpmn:message id="Message_0ljgal1" name="cancelOrderMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Order_Cancel">
       <bpmndi:BPMNEdge id="Flow_0ehgm1s_di" bpmnElement="Flow_0ehgm1s">
@@ -65,7 +78,10 @@
       <bpmndi:BPMNEdge id="Flow_1bdfzy3_di" bpmnElement="Flow_1bdfzy3">
         <di:waypoint x="520" y="255" />
         <di:waypoint x="520" y="230" />
-        <di:waypoint x="750" y="230" />
+        <di:waypoint x="790" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="539" y="240" width="81" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1snzsvl_di" bpmnElement="Flow_1snzsvl">
         <di:waypoint x="420" y="142" />
@@ -76,14 +92,14 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ngwekj_di" bpmnElement="Flow_1ngwekj">
-        <di:waypoint x="850" y="200" />
-        <di:waypoint x="905" y="200" />
-        <di:waypoint x="905" y="147" />
+        <di:waypoint x="890" y="200" />
+        <di:waypoint x="910" y="200" />
+        <di:waypoint x="910" y="147" />
         <di:waypoint x="930" y="147" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0hnrcd2_di" bpmnElement="Flow_0hnrcd2">
         <di:waypoint x="545" y="200" />
-        <di:waypoint x="750" y="200" />
+        <di:waypoint x="790" y="200" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1rwijiy_di" bpmnElement="Flow_1rwijiy">
         <di:waypoint x="420" y="142" />
@@ -97,7 +113,7 @@
         <di:waypoint x="445" y="117" />
         <di:waypoint x="930" y="117" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="647" y="99" width="82" height="14" />
+          <dc:Bounds x="449" y="103" width="82" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0rgy1jy_di" bpmnElement="Flow_0rgy1jy">
@@ -105,32 +121,49 @@
         <di:waypoint x="1082" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0lpa4c8_di" bpmnElement="Flow_0lpa4c8">
-        <di:waypoint x="188" y="110" />
+        <di:waypoint x="178" y="110" />
         <di:waypoint x="250" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ciexkp_di" bpmnElement="Flow_1ciexkp">
+        <di:waypoint x="520" y="305" />
+        <di:waypoint x="520" y="390" />
+        <di:waypoint x="630" y="390" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="539" y="356" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rg00v0_di" bpmnElement="Flow_1rg00v0">
+        <di:waypoint x="730" y="390" />
+        <di:waypoint x="760" y="390" />
+        <di:waypoint x="760" y="230" />
+        <di:waypoint x="790" y="230" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1mm4phq_di" bpmnElement="Event_End_Cancel">
         <dc:Bounds x="1082" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1ywdilj_di" bpmnElement="Activity_0h9e36l">
+      <bpmndi:BPMNShape id="Activity_1ywdilj_di" bpmnElement="Activity_0h9e36l" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <dc:Bounds x="930" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0g66v5k_di" bpmnElement="Gateway_0g66v5k" isMarkerVisible="true">
+      <bpmndi:BPMNShape id="Gateway_0g66v5k_di" bpmnElement="Gateway_0g66v5k" isMarkerVisible="true" bioc:stroke="rgb(251, 140, 0)" bioc:fill="rgb(255, 224, 178)">
         <dc:Bounds x="395" y="92" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1lobtc5_di" bpmnElement="Gateway_1lobtc5" isMarkerVisible="true">
+      <bpmndi:BPMNShape id="Gateway_1lobtc5_di" bpmnElement="Gateway_1lobtc5" isMarkerVisible="true" bioc:stroke="rgb(251, 140, 0)" bioc:fill="rgb(255, 224, 178)">
         <dc:Bounds x="495" y="175" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1nyetsv_di" bpmnElement="Activity_1igangc">
-        <dc:Bounds x="750" y="160" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0dz8rrr_di" bpmnElement="Gateway_0dz8rrr" isMarkerVisible="true">
+      <bpmndi:BPMNShape id="Gateway_0dz8rrr_di" bpmnElement="Gateway_0dz8rrr" isMarkerVisible="true" bioc:stroke="rgb(251, 140, 0)" bioc:fill="rgb(255, 224, 178)">
         <dc:Bounds x="495" y="255" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0h6qvs5_di" bpmnElement="Activity_19btk04">
+      <bpmndi:BPMNShape id="Activity_0h6qvs5_di" bpmnElement="Activity_19btk04" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <dc:Bounds x="250" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0yv89t1_di" bpmnElement="Event_Cancel_Order">
-        <dc:Bounds x="152" y="92" width="36" height="36" />
+      <bpmndi:BPMNShape id="Activity_1nyetsv_di" bpmnElement="Activity_1igangc" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
+        <dc:Bounds x="790" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_01r3knr_di" bpmnElement="Activity_0uhrvm0" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
+        <dc:Bounds x="630" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1exoy9r_di" bpmnElement="Event_1exoy9r">
+        <dc:Bounds x="142" y="92" width="36" height="36" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

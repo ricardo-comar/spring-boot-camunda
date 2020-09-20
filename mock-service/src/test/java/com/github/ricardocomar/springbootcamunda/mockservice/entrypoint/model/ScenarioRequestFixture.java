@@ -10,7 +10,7 @@ public class ScenarioRequestFixture implements TemplateLoader {
     public void load() {
         Fixture.of(ScenarioRequest.class).addTemplate("valid", new Rule() {
             {
-                add("variables", has(3).of(VariableRequest.class, "boolean", "string", "long"));
+                add("variables", has(4).of(VariableRequest.class, "boolean", "string", "long", "script"));
             }
         });
 

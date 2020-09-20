@@ -2,6 +2,7 @@ package com.github.ricardocomar.springbootcamunda.mockservice.entrypoint;
 
 import com.github.ricardocomar.springbootcamunda.mockservice.handler.MockServiceHandler;
 import org.camunda.bpm.client.ExternalTaskClient;
+import org.camunda.bpm.client.backoff.ExponentialBackoffStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,10 @@ public class ExternalServiceController {
             return ResponseEntity.badRequest().build();
         }
 
-        ExternalTaskClient client =
-                ExternalTaskClient.create().baseUrl(engineUrl).asyncResponseTimeout(1000).build();
+        ExternalTaskClient client = ExternalTaskClient.create().baseUrl(engineUrl)
+                .backoffStrategy(new ExponentialBackoffStrategy(0, 0, 0)).workerId(topic + "Worker")
+                .asyncResponseTimeout(1000).build();
+
         client.subscribe(topic).handler(handler).open();
         handler.registerTopic(topic);
 

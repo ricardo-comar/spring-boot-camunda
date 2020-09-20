@@ -11,6 +11,8 @@
 
   <modules>
     <module>mock-service</module>
+    <module>order-service</module>
+    <module>card-service</module>
   </modules>
 
   <build>

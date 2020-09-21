@@ -1,6 +1,5 @@
 package com.github.ricardocomar.springbootcamunda.mockservice.model;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,15 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Scenario {
+public class Condition {
 
-    private String scenarioId;
+    private String conditionScript;
 
-    private String topicName;
-
-    private Condition condition;    
-
-    private Long order;
-
-    private List<Variable> variables;
 }

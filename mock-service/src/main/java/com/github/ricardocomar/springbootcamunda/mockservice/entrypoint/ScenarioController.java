@@ -39,7 +39,7 @@ public class ScenarioController {
 
         Scenario scenario = saveScenario.save(mapper.fromRequest(request));
 
-        LOGGER.info("Scenario {} for topic {} created", request.getScenarioId(), request.getTopicName());
+        LOGGER.info("Scenario {} for topic {} created", scenario.getScenarioId(), scenario.getTopicName());
         return ResponseEntity.status(HttpStatus.CREATED).body(scenario);
 
     }

@@ -4,7 +4,7 @@ import com.github.ricardocomar.springbootcamunda.mockservice.gateway.entity.Scen
 import com.github.ricardocomar.springbootcamunda.mockservice.model.Scenario;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {VariableEntityMapper.class})
+@Mapper(componentModel = "spring", uses = {VariableEntityMapper.class, ConditionEntityMapper.class})
 public interface ScenarioEntityMapper {
 
     public Scenario fromEntity(ScenarioEntity entity);

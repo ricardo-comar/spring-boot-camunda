@@ -44,22 +44,44 @@ public class MockServiceHandlerTest {
     }
 
     @Test
-    public void testScriptValid() {
+    public void testScriptValid() throws Exception {
 
         variables.put("myVar", 4);
-        Variable variable = new Variable("variable", null, null, "return 7 * myVar");
-        Object result = handler.handleVariable(externalTask, variables, errors, variable);
+        Object result = handler.evalScript("return 7 * myVar", variables);
 
         assertThat(errors.values(), hasSize(0));
         assertThat(variables.values(), hasSize(1));
         assertThat(result, equalTo(28));
     }
 
-    @Test @Ignore("Turn on when identify how to throw exception on runtime errors")
-    public void testScriptError() {
+    @Test(expected = Exception.class) @Ignore("Turn on when identify how to throw exception on runtime errors")
+    public void testScriptError() throws Exception {
 
         variables.put("myVarX", 4);
-        Variable variable = new Variable("variable", null, null, "return 7 * myVar");
+        Object result = handler.evalScript("return 7 * myVar", variables);
+
+        assertThat(errors.values(), hasSize(1));
+        assertThat(variables.values(), hasSize(1));
+        assertThat(result, nullValue());
+    }
+
+    @Test
+    public void testHandleVariableValid() {
+
+        variables.put("myVar", 4);
+        Variable variable = new Variable("variable", "15", "java.lang.Long", null);
+        Object result = handler.handleVariable(externalTask, variables, errors, variable);
+
+        assertThat(errors.values(), hasSize(0));
+        assertThat(variables.values(), hasSize(1));
+        assertThat(result, equalTo(15L));
+    }
+
+    @Test
+    public void testHandleVariableInvalid() {
+
+        variables.put("myVar", 4);
+        Variable variable = new Variable("variable", "15", "xxx", null);
         Object result = handler.handleVariable(externalTask, variables, errors, variable);
 
         assertThat(errors.values(), hasSize(1));

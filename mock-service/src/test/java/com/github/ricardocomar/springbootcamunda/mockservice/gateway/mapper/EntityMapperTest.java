@@ -21,6 +21,8 @@ public class EntityMapperTest {
         FixtureFactoryLoader.loadTemplates(MockServiceApplication.class.getPackage().getName());
         ReflectionTestUtils.setField(mapper, "variableEntityMapper",
                 new VariableEntityMapperImpl());
+        ReflectionTestUtils.setField(mapper, "conditionEntityMapper",
+                new ConditionEntityMapperImpl());
 
         model = Fixture.from(Scenario.class).gimme("valid");
         entity = Fixture.from(ScenarioEntity.class).gimme("valid");

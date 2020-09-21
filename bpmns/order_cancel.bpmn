@@ -64,13 +64,26 @@
     <bpmn:sequenceFlow id="Flow_1rg00v0" sourceRef="Activity_0uhrvm0" targetRef="Activity_1igangc" />
     <bpmn:startEvent id="Event_1exoy9r">
       <bpmn:outgoing>Flow_0lpa4c8</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0u9dpdt" messageRef="Message_0ljgal1" />
     </bpmn:startEvent>
   </bpmn:process>
   <bpmn:message id="Message_1niuu3y" name="cancelOrderMessage" />
   <bpmn:message id="Message_0ljgal1" name="cancelOrderMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Order_Cancel">
+      <bpmndi:BPMNEdge id="Flow_1rg00v0_di" bpmnElement="Flow_1rg00v0">
+        <di:waypoint x="730" y="390" />
+        <di:waypoint x="760" y="390" />
+        <di:waypoint x="760" y="230" />
+        <di:waypoint x="790" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ciexkp_di" bpmnElement="Flow_1ciexkp">
+        <di:waypoint x="520" y="305" />
+        <di:waypoint x="520" y="390" />
+        <di:waypoint x="630" y="390" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="539" y="356" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0ehgm1s_di" bpmnElement="Flow_0ehgm1s">
         <di:waypoint x="350" y="117" />
         <di:waypoint x="395" y="117" />
@@ -124,20 +137,6 @@
         <di:waypoint x="178" y="110" />
         <di:waypoint x="250" y="110" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1ciexkp_di" bpmnElement="Flow_1ciexkp">
-        <di:waypoint x="520" y="305" />
-        <di:waypoint x="520" y="390" />
-        <di:waypoint x="630" y="390" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="539" y="356" width="82" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1rg00v0_di" bpmnElement="Flow_1rg00v0">
-        <di:waypoint x="730" y="390" />
-        <di:waypoint x="760" y="390" />
-        <di:waypoint x="760" y="230" />
-        <di:waypoint x="790" y="230" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1mm4phq_di" bpmnElement="Event_End_Cancel">
         <dc:Bounds x="1082" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -150,19 +149,19 @@
       <bpmndi:BPMNShape id="Gateway_1lobtc5_di" bpmnElement="Gateway_1lobtc5" isMarkerVisible="true" bioc:stroke="rgb(251, 140, 0)" bioc:fill="rgb(255, 224, 178)">
         <dc:Bounds x="495" y="175" width="50" height="50" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nyetsv_di" bpmnElement="Activity_1igangc" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
+        <dc:Bounds x="790" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0dz8rrr_di" bpmnElement="Gateway_0dz8rrr" isMarkerVisible="true" bioc:stroke="rgb(251, 140, 0)" bioc:fill="rgb(255, 224, 178)">
         <dc:Bounds x="495" y="255" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0h6qvs5_di" bpmnElement="Activity_19btk04" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <dc:Bounds x="250" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1nyetsv_di" bpmnElement="Activity_1igangc" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
-        <dc:Bounds x="790" y="160" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_01r3knr_di" bpmnElement="Activity_0uhrvm0" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <dc:Bounds x="630" y="350" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1exoy9r_di" bpmnElement="Event_1exoy9r">
+      <bpmndi:BPMNShape id="Event_1ppknsk_di" bpmnElement="Event_1exoy9r">
         <dc:Bounds x="142" y="92" width="36" height="36" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>

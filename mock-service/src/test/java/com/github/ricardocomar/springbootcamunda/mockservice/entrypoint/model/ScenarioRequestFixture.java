@@ -11,7 +11,8 @@ public class ScenarioRequestFixture implements TemplateLoader {
         Fixture.of(ScenarioRequest.class).addTemplate("valid", new Rule() {
             {
                 add("topicName", "mockTopic");
-                add("scenarioId", "mockScenario");
+                add("condition", one(ConditionRequest.class, "valid"));
+                add("order", 1L);
                 add("variables",
                         has(4).of(VariableRequest.class, "boolean", "string", "long", "script"));
             }

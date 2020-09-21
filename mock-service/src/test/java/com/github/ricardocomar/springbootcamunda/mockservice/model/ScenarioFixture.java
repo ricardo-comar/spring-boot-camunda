@@ -10,9 +10,10 @@ public class ScenarioFixture implements TemplateLoader {
     public void load() {
         Fixture.of(Scenario.class).addTemplate("valid", new Rule() {
             {
-                add("id", 1L);
-                add("topicName", "mockTopic");
                 add("scenarioId", "mockScenario");
+                add("topicName", "mockTopic");
+                add("order", 1L);
+                add("condition", one(Condition.class, "valid"));
                 add("variables", has(4).of(Variable.class, "boolean", "string", "long", "script"));
             }
         });

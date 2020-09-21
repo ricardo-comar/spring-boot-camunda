@@ -1,5 +1,6 @@
 package com.github.ricardocomar.springbootcamunda.mockservice.usecase;
 
+import java.util.List;
 import java.util.Optional;
 import com.github.ricardocomar.springbootcamunda.mockservice.gateway.QueryScenarioGateway;
 import com.github.ricardocomar.springbootcamunda.mockservice.model.Scenario;
@@ -14,6 +15,10 @@ public class QueryScenarioUseCase {
 
     public Optional<Scenario> queryScenario(String topicName, String scenarioId) {
         return gateway.query(topicName, scenarioId);
+    }
+    
+    public List<Scenario> queryScenarios(String topicName) {
+        return gateway.query(topicName);
     }
     
 }

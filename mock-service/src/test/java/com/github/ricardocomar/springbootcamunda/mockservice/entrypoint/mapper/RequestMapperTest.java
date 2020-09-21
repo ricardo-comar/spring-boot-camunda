@@ -21,6 +21,8 @@ public class RequestMapperTest {
     public RequestMapperTest() {
         ReflectionTestUtils.setField(mapper, "variableRequestMapper",
                 new VariableRequestMapperImpl());
+        ReflectionTestUtils.setField(mapper, "conditionRequestMapper",
+                new ConditionRequestMapperImpl());
     }
 
     @BeforeClass
@@ -30,7 +32,7 @@ public class RequestMapperTest {
 
     @Test
     public void testRequestToModel() {
-        model.setId(null);
+        model.setScenarioId(null);
         assertThat(model, equalTo(mapper.fromRequest(request)));
     }
 

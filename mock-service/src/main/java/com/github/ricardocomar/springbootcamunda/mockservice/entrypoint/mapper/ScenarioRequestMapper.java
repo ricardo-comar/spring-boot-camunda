@@ -4,7 +4,7 @@ import com.github.ricardocomar.springbootcamunda.mockservice.entrypoint.model.Sc
 import com.github.ricardocomar.springbootcamunda.mockservice.model.Scenario;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {VariableRequestMapper.class})
+@Mapper(componentModel = "spring", uses = {VariableRequestMapper.class, ConditionRequestMapper.class})
 public interface ScenarioRequestMapper {
 
     public Scenario fromRequest(ScenarioRequest request);

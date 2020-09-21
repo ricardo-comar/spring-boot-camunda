@@ -20,7 +20,7 @@ public class RemoveScenarioGateway {
     public void remove(Scenario scenario) {
 
         Optional<ScenarioEntity> scenarioOpt = scenarioRepo
-                .findByTopicNameAndScenarioId(scenario.getTopicName(), scenario.getScenarioId());
+                .findById(scenario.getScenarioId());
 
         if (scenarioOpt.isPresent()) {
             varRepo.deleteAll(scenarioOpt.get().getVariables());

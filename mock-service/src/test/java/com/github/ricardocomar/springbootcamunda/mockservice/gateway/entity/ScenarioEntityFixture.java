@@ -10,9 +10,10 @@ public class ScenarioEntityFixture implements TemplateLoader {
     public void load() {
         Fixture.of(ScenarioEntity.class).addTemplate("valid", new Rule() {
             {
-                add("id", 1L);
                 add("topicName", "mockTopic");
                 add("scenarioId", "mockScenario");
+                add("order", 1L);
+                add("condition", one(ConditionEntity.class, "valid"));
                 add("variables", has(4).of(VariableEntity.class, "boolean", "string", "long", "script"));
             }
         });

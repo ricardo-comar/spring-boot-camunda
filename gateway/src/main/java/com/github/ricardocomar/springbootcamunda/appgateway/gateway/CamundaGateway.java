@@ -3,10 +3,12 @@ package com.github.ricardocomar.springbootcamunda.appgateway.gateway;
 import java.util.HashMap;
 import java.util.Map;
 import com.github.ricardocomar.springbootcamunda.appgateway.config.AppConfiguration;
-import com.github.ricardocomar.springbootcamunda.appgateway.gateway.model.PublishOrderRequest;
-import com.github.ricardocomar.springbootcamunda.appgateway.gateway.model.PublishOrderResponse;
+import com.github.ricardocomar.springbootcamunda.appgateway.gateway.model.ProcessRequest;
+import com.github.ricardocomar.springbootcamunda.appgateway.gateway.model.ProcessResponse;
+import com.github.ricardocomar.springbootcamunda.appgateway.gateway.model.ProcessVariable;
 import com.github.ricardocomar.springbootcamunda.appgateway.model.Order;
 import com.github.ricardocomar.springbootcamunda.appgateway.model.Process;
+import com.github.ricardocomar.springbootcamunda.appgateway.model.StockReplace;
 import org.jboss.logging.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,19 +22,38 @@ public class CamundaGateway {
 
     public Process sendOrder(Order order) {
 
-        Map<String, PublishOrderRequest.Variable> variables =
-                new HashMap<String, PublishOrderRequest.Variable>();
+        Map<String, ProcessVariable> variables =
+                new HashMap<String, ProcessVariable>();
 
-        variables.put("correlationId", new PublishOrderRequest.Variable(
+        variables.put("correlationId", new ProcessVariable(
                 MDC.get(AppConfiguration.PROP_CORRELATION_ID), String.class.getSimpleName()));
         variables.put("orderId",
-                new PublishOrderRequest.Variable(order.getOrderId(), String.class.getSimpleName()));
+                new ProcessVariable(order.getOrderId(), String.class.getSimpleName()));
         variables.put("value",
-                new PublishOrderRequest.Variable(order.getValue(), Double.class.getSimpleName()));
+                new ProcessVariable(order.getValue(), Double.class.getSimpleName()));
         
-        PublishOrderRequest request = PublishOrderRequest.builder().variables(variables).build();
+        ProcessRequest request = ProcessRequest.builder().variables(variables).build();
 
-        PublishOrderResponse response = client.sendOrder(request);
+        ProcessResponse response = client.sendRequest("Order_Request", request); 
+
+        return Process.builder().processId(response.getId()).build();
+    }
+
+    public Process sendStockReplace(StockReplace stockReplace) {
+
+        Map<String, ProcessVariable> variables =
+                new HashMap<String, ProcessVariable>();
+
+        variables.put("correlationId", new ProcessVariable(
+                MDC.get(AppConfiguration.PROP_CORRELATION_ID), String.class.getSimpleName()));
+        variables.put("sku",
+                new ProcessVariable(stockReplace.getSku(), String.class.getSimpleName()));
+        variables.put("value",
+                new ProcessVariable(stockReplace.getQuantity(), Double.class.getSimpleName()));
+        
+        ProcessRequest request = ProcessRequest.builder().variables(variables).build();
+
+        ProcessResponse response = client.sendRequest("stock-service-process", request); 
 
         return Process.builder().processId(response.getId()).build();
     }

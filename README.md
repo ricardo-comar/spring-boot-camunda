@@ -46,3 +46,7 @@ https://github.com/camunda/camunda-external-task-client-spring-boot
 
 
 https://camunda.com/best-practices/invoking-services-from-the-process/#_understanding_and_using_strong_external_tasks_strong
+
+https://docs.camunda.org/manual/latest/user-guide/process-engine/multi-tenancy/#one-process-engine-per-tenant
+
+

@@ -10,9 +10,9 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>mock-service</module>
     <module>order-service</module>
     <module>card-service</module>
+    <module>gateway</module>
   </modules>
 
   <build>

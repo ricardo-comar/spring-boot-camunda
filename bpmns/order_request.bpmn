@@ -41,14 +41,11 @@
     </bpmn:exclusiveGateway>
     <bpmn:exclusiveGateway id="Gateway_1cxxfg4" name="Approved ?">
       <bpmn:incoming>Flow_0wbd64g</bpmn:incoming>
-      <bpmn:outgoing>Flow_0t7r1d6</bpmn:outgoing>
       <bpmn:outgoing>Flow_03m4r1e</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0t7r1d6</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_03m4r1e" name="Denied" sourceRef="Gateway_1cxxfg4" targetRef="Activity_00dy4hm">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not approved}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0t7r1d6" name="Approved" sourceRef="Gateway_1cxxfg4" targetRef="Event_0mrrfy2">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0wbd64g" sourceRef="Activity_15qhq8x" targetRef="Gateway_1cxxfg4" />
     <bpmn:sequenceFlow id="Flow_10fy6h6" sourceRef="StartEvent_1" targetRef="card_validator" />
@@ -88,10 +85,6 @@
       </bpmn:extensionElements>
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${riskScore &gt; 0.5}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:endEvent id="Event_0mrrfy2" name="Process Order Message">
-      <bpmn:incoming>Flow_0t7r1d6</bpmn:incoming>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_141nc94" camunda:expression="${execution.getProcessEngineServices().getRuntimeService().createMessageCorrelation(&#34;processOrderMessage&#34;).setVariables(execution.getVariables()).correlateWithResult()}" />
-    </bpmn:endEvent>
     <bpmn:callActivity id="Activity_00dy4hm" name="Order Cancel" calledElement="Order_Cancel">
       <bpmn:extensionElements>
         <camunda:in variables="all" />
@@ -100,6 +93,12 @@
       <bpmn:incoming>Flow_03m4r1e</bpmn:incoming>
       <bpmn:incoming>Flow_022bo7k</bpmn:incoming>
       <bpmn:incoming>Flow_1doja6z</bpmn:incoming>
+    </bpmn:callActivity>
+    <bpmn:sequenceFlow id="Flow_0t7r1d6" name="Approved" sourceRef="Gateway_1cxxfg4" targetRef="Activity_1u9p39a">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:callActivity id="Activity_1u9p39a" name="Order Process" calledElement="Order_Process">
+      <bpmn:incoming>Flow_0t7r1d6</bpmn:incoming>
     </bpmn:callActivity>
   </bpmn:process>
   <bpmn:message id="Message_0dwt8r2" name="cancelOrderMessage" />
@@ -163,9 +162,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0t7r1d6_di" bpmnElement="Flow_0t7r1d6">
         <di:waypoint x="975" y="117" />
-        <di:waypoint x="1072" y="117" />
+        <di:waypoint x="1070" y="117" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="983" y="99" width="46" height="14" />
+          <dc:Bounds x="982" y="99" width="46" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_03m4r1e_di" bpmnElement="Flow_03m4r1e">
@@ -214,14 +213,11 @@
           <dc:Bounds x="922" y="62" width="56" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0mrrfy2_di" bpmnElement="Event_0mrrfy2" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
-        <dc:Bounds x="1072" y="99" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1056" y="142" width="72" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0xg2zbl_di" bpmnElement="Activity_00dy4hm" bioc:stroke="rgb(229, 57, 53)" bioc:fill="rgb(255, 205, 210)">
         <dc:Bounds x="890" y="275" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ngtcnw_di" bpmnElement="Activity_1u9p39a" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
+        <dc:Bounds x="1070" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -1,0 +1,25 @@
+camunda.bpm.admin-user:
+  id: demo
+  password: demo
+server:
+  port: 8085
+
+spring:
+  application:
+    name: order-service
+  cloud:
+    discovery:
+      enabled: false
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    generate-ddl: true
+    hibernate.ddl-auto: update
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/process-engine
+    username: camunda
+    password: camunda

@@ -9,7 +9,7 @@
       <bpmn:incoming>Flow_1xde5lq</bpmn:incoming>
       <bpmn:outgoing>Flow_0vb61i9</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:exclusiveGateway id="Gateway_0xfyypr" name="Captured ?">
+    <bpmn:exclusiveGateway id="Gateway_0xfyypr" name="Captured ?" default="Flow_11vaqc7">
       <bpmn:incoming>Flow_0vb61i9</bpmn:incoming>
       <bpmn:outgoing>Flow_0b0stft</bpmn:outgoing>
       <bpmn:outgoing>Flow_11vaqc7</bpmn:outgoing>
@@ -42,15 +42,13 @@
         <bpmn:incoming>Flow_1n6yg86</bpmn:incoming>
         <bpmn:outgoing>Flow_0xdttad</bpmn:outgoing>
       </bpmn:serviceTask>
-      <bpmn:exclusiveGateway id="Gateway_0ettyik" name="Out Of Stock ?">
+      <bpmn:exclusiveGateway id="Gateway_0ettyik" name="Out Of Stock ?" default="Flow_1m18kvc">
         <bpmn:incoming>Flow_0xdttad</bpmn:incoming>
         <bpmn:outgoing>Flow_1m18kvc</bpmn:outgoing>
         <bpmn:outgoing>Flow_1xabx9j</bpmn:outgoing>
       </bpmn:exclusiveGateway>
       <bpmn:sequenceFlow id="Flow_0xdttad" sourceRef="Activity_11lyg78" targetRef="Gateway_0ettyik" />
-      <bpmn:sequenceFlow id="Flow_1m18kvc" sourceRef="Gateway_0ettyik" targetRef="Event_0gni8y3">
-        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${outOfStock}</bpmn:conditionExpression>
-      </bpmn:sequenceFlow>
+      <bpmn:sequenceFlow id="Flow_1m18kvc" sourceRef="Gateway_0ettyik" targetRef="Event_0gni8y3" />
       <bpmn:intermediateCatchEvent id="Event_0gni8y3" name="Product Replaced">
         <bpmn:incoming>Flow_1m18kvc</bpmn:incoming>
         <bpmn:outgoing>Flow_1n6yg86</bpmn:outgoing>
@@ -64,7 +62,7 @@
         <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${shipped}</bpmn:conditionExpression>
       </bpmn:sequenceFlow>
     </bpmn:subProcess>
-    <bpmn:exclusiveGateway id="Gateway_0v2lzc4" name="Retryed ?">
+    <bpmn:exclusiveGateway id="Gateway_0v2lzc4" name="Retryed ?" default="Flow_0h1lhsk">
       <bpmn:incoming>Flow_11vaqc7</bpmn:incoming>
       <bpmn:outgoing>Flow_0p78xk9</bpmn:outgoing>
       <bpmn:outgoing>Flow_0h1lhsk</bpmn:outgoing>
@@ -107,6 +105,7 @@
           <camunda:property />
         </camunda:properties>
       </bpmn:extensionElements>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${paymentConfirmed}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0vb61i9" sourceRef="Activity_179jxho" targetRef="Gateway_0xfyypr" />
     <bpmn:sequenceFlow id="Flow_1xde5lq" sourceRef="Event_00yiqjq" targetRef="Activity_179jxho" />

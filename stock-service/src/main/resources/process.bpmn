@@ -8,7 +8,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_16gzt2m" sourceRef="notify-stock-rep" targetRef="EndEvent_0x6ir2l" />
     <bpmn:endEvent id="EndEvent_0x6ir2l">
       <bpmn:incoming>SequenceFlow_16gzt2m</bpmn:incoming>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0gqemx8" camunda:expression="${execution.getProcessEngineServices().getRuntimeService().createMessageCorrelation(&#34;productReceive&#34;).setVariables(execution.getVariables()).correlateWithResult()}" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0gqemx8" camunda:expression="${execution.getProcessEngineServices().getRuntimeService().createMessageCorrelation(&#34;productReceive&#34;).setVariables(execution.getVariables()).correlateAllWithResult()}" />
     </bpmn:endEvent>
     <bpmn:serviceTask id="notify-stock-rep" name="Notify Stock Replacement" camunda:delegateExpression="${notifyStockReplacementService}">
       <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>

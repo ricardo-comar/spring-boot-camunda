@@ -98,12 +98,23 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:callActivity id="Activity_1u9p39a" name="Order Process" calledElement="Order_Process">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0t7r1d6</bpmn:incoming>
     </bpmn:callActivity>
   </bpmn:process>
   <bpmn:message id="Message_0dwt8r2" name="cancelOrderMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Order_Request">
+      <bpmndi:BPMNEdge id="Flow_0t7r1d6_di" bpmnElement="Flow_0t7r1d6">
+        <di:waypoint x="975" y="117" />
+        <di:waypoint x="1070" y="117" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="982" y="99" width="46" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_022bo7k_di" bpmnElement="Flow_022bo7k">
         <di:waypoint x="740" y="275" />
         <di:waypoint x="740" y="315" />
@@ -159,13 +170,6 @@
       <bpmndi:BPMNEdge id="Flow_0wbd64g_di" bpmnElement="Flow_0wbd64g">
         <di:waypoint x="880" y="117" />
         <di:waypoint x="925" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0t7r1d6_di" bpmnElement="Flow_0t7r1d6">
-        <di:waypoint x="975" y="117" />
-        <di:waypoint x="1070" y="117" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="982" y="99" width="46" height="14" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_03m4r1e_di" bpmnElement="Flow_03m4r1e">
         <di:waypoint x="950" y="142" />

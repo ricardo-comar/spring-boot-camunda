@@ -19,6 +19,9 @@ public class OrderRequestValidator extends AbstractValidator<OrderRequest> {
     @Autowired
     private CreditCardValidator ccValidator;
 
+    @Autowired
+    private BankSlipValidator bsValidator;
+
     @Override
     public void rules() {
 
@@ -28,11 +31,18 @@ public class OrderRequestValidator extends AbstractValidator<OrderRequest> {
         ruleFor("order.value", OrderRequest::getValue).must(greaterThan(0.0))
                 .withMessage("Order value is mandatory and must be positive").critical();
 
-        ruleFor("order.card", OrderRequest::getCard).must(not(nullValue()))
-                .withMessage("Order Card is mandatory").critical();
+        ruleFor("order.card", o -> o).must(
+                (nullValue(OrderRequest::getCard).and(not(nullValue(OrderRequest::getBankSlip))))
+                        .or(not(nullValue(OrderRequest::getCard))
+                                .and(nullValue(OrderRequest::getBankSlip))))
+                .withMessage(
+                        "Order Card or Bank Slip is mandatory at least one of them, but not both")
+                .critical();
 
-        ruleFor(OrderRequest::getCard).whenever(not(nullValue()))
-                .withValidator(ccValidator).critical();
+        ruleFor(OrderRequest::getCard).whenever(not(nullValue())).withValidator(ccValidator)
+                .critical();
+        ruleFor(OrderRequest::getBankSlip).whenever(not(nullValue())).withValidator(bsValidator)
+                .critical();
 
     }
 }

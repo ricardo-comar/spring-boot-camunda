@@ -158,8 +158,16 @@
 			<artifactId>logback-jackson</artifactId>
 			<version>${logback.contrib.version}</version>
 		</dependency>
-		<dependency>
 			<!-- JsonLayout -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>        
+		<dependency>
 			<groupId>ch.qos.logback.contrib</groupId>
 			<artifactId>logback-json-classic</artifactId>
 			<version>${logback.contrib.version}</version>

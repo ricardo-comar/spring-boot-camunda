@@ -5,13 +5,14 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import java.time.LocalDate;
 import com.github.ricardocomar.springbootcamunda.appgateway.entrypoint.model.OrderRequest;
 import org.junit.Test;
 import br.com.fluentvalidator.context.ValidationResult;
 
 public class OrderRequestValidatorTest {
 
-    private OrderRequestValidator validator = new OrderRequestValidator(new CreditCardValidator());
+    private OrderRequestValidator validator = new OrderRequestValidator(new CreditCardValidator(), new BankSlipValidator());
 
     @Test
     public void testEmpty() {
@@ -22,30 +23,65 @@ public class OrderRequestValidatorTest {
         assertThat(validation.getErrors(), hasSize(3));
     }
 
+
     @Test
-    public void testCardEmpty() {
+    public void testBankSlipEmpty() {
 
         OrderRequest order = new OrderRequest();
         order.setCustomer("John Snow");
         order.setValue(123.0);
-        order.setCard(order. new CreditCard());
+        order.setBankSlip(new OrderRequest.BankSlip());
 
         ValidationResult validation = validator.validate(order);
         assertThat(validation.getErrors(), is(not(empty())));
-        assertThat(validation.getErrors(), hasSize(4));
+        assertThat(validation.getErrors(), hasSize(3));
     }
 
     @Test
-    public void testValid() {
+    public void testNullCombinations() {
 
         OrderRequest order = new OrderRequest();
         order.setCustomer("John Snow");
         order.setValue(123.0);
-        order.setCard(order. new CreditCard());
-        order.getCard().setCcv("ccv");
-        order.getCard().setExpirity("expirity");
-        order.getCard().setName("John Snow");
-        order.getCard().setNumber("number");
+
+        ValidationResult validation = validator.validate(order);
+        assertThat(validation.getErrors(), is(not(empty())));
+        assertThat(validation.getErrors(), hasSize(1));
+    }
+
+    @Test
+    public void testInstanceCombinations() {
+
+        OrderRequest order = new OrderRequest();
+        order.setCustomer("John Snow");
+        order.setValue(123.0);
+        order.setBankSlip(new OrderRequest.BankSlip());
+        order.setCard(new OrderRequest.CreditCard());
+
+        ValidationResult validation = validator.validate(order);
+        assertThat(validation.getErrors(), is(not(empty())));
+        assertThat(validation.getErrors(), hasSize(8));
+    }
+
+    @Test
+    public void testValidCard() {
+
+        OrderRequest order = new OrderRequest();
+        order.setCustomer("John Snow");
+        order.setValue(123.0);
+        order.setCard(new OrderRequest.CreditCard("John Snow", "number", "expirity", "ccv"));
+
+        ValidationResult validation = validator.validate(order);
+        assertThat(validation.getErrors(), is(empty()));
+    }
+    
+    @Test
+    public void testValidBankSlip() {
+
+        OrderRequest order = new OrderRequest();
+        order.setCustomer("John Snow");
+        order.setValue(123.0);
+        order.setBankSlip(new OrderRequest.BankSlip("123", LocalDate.now().plusWeeks(1), 123.0));
 
         ValidationResult validation = validator.validate(order);
         assertThat(validation.getErrors(), is(empty()));

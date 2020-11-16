@@ -1,5 +1,6 @@
 package com.github.ricardocomar.springbootcamunda.paymentservice.config;
 
+import com.github.ricardocomar.springbootcamunda.paymentservice.handler.BankSlipValidatorHandler;
 import com.github.ricardocomar.springbootcamunda.paymentservice.handler.CardValidatorHandler;
 import org.camunda.bpm.client.ExternalTaskClient;
 import org.springframework.beans.factory.InitializingBean;
@@ -16,6 +17,9 @@ public class ExternalServiceConfiguration implements InitializingBean {
     @Autowired
     private CardValidatorHandler cardValidatorHandler;
 
+    @Autowired
+    private BankSlipValidatorHandler bankSlipValidatorHandler;
+
     @Override
     public void afterPropertiesSet() throws Exception {
         ExternalTaskClient client =
@@ -23,6 +27,7 @@ public class ExternalServiceConfiguration implements InitializingBean {
 
         // subscribe to the topic
         client.subscribe("cardValidation").handler(cardValidatorHandler).open();
+        client.subscribe("bankSlipValidation").handler(bankSlipValidatorHandler).open();
 
     }
 

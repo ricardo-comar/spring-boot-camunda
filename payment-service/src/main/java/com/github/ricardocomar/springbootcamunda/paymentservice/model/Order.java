@@ -17,5 +17,7 @@ public class Order {
 
     private CreditCard card;
 
+    private BankSlip bankSlip;
+
     private OrderStateEnum state;
 }

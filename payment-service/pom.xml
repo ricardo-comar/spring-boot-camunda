@@ -10,9 +10,9 @@
 	</parent>
 
 	<groupId>com.github.ricardo-comar.spring-boot-camunda</groupId>
-	<artifactId>card-service</artifactId>
+	<artifactId>payment-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>card-service</name>
+	<name>payment-service</name>
 	<description>Demo project for Camunda Integration</description>
 
 	<properties>
@@ -178,8 +178,16 @@
 			<artifactId>logback-jackson</artifactId>
 			<version>${logback.contrib.version}</version>
 		</dependency>
+        <!-- JsonLayout -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>        
 		<dependency>
-			<!-- JsonLayout -->
 			<groupId>ch.qos.logback.contrib</groupId>
 			<artifactId>logback-json-classic</artifactId>
 			<version>${logback.contrib.version}</version>

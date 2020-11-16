@@ -3,10 +3,14 @@ package com.github.ricardocomar.springbootcamunda.paymentservice.validator;
 import static br.com.fluentvalidator.predicate.LogicalPredicate.not;
 import static br.com.fluentvalidator.predicate.StringPredicate.stringEmptyOrNull;
 import static br.com.fluentvalidator.predicate.StringPredicate.stringMatches;
+
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import com.github.ricardocomar.springbootcamunda.paymentservice.model.CreditCard;
+
 import org.springframework.stereotype.Component;
+
+import com.github.ricardocomar.springbootcamunda.paymentservice.model.CreditCard;
+
 import br.com.fluentvalidator.AbstractValidator;
 import lombok.NoArgsConstructor;
 

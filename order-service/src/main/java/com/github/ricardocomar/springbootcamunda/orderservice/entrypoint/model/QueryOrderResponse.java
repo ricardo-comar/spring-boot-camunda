@@ -13,5 +13,7 @@ public class QueryOrderResponse {
 
     private QueryOrderCreditCard card;
 
+    public QueryOrderBankSlip bankSlip;
+
     private QueryOrderStateEnum state;
 }

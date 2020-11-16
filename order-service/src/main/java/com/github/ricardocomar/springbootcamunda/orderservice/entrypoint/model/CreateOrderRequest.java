@@ -16,4 +16,6 @@ public class CreateOrderRequest {
 
     public CreateOrderCreditCard card;
 
+    public CreateOrderBankSlip bankSlip;
+
 }

@@ -34,6 +34,9 @@ public class OrderEntity {
     @Embedded
     public CreditCardEntity card;
 
+    @Embedded
+    public BankSlipEntity bankSlip;
+
     @Column(nullable = false)
     public OrderStateEnum state;
 }

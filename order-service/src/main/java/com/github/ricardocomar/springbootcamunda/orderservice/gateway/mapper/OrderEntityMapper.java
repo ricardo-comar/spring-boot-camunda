@@ -5,7 +5,7 @@ import com.github.ricardocomar.springbootcamunda.orderservice.model.Order;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {CreditCardEntityMapper.class})
+@Mapper(componentModel = "spring", uses = {CreditCardEntityMapper.class, BankSlipEntityMapper.class})
 public abstract class OrderEntityMapper {
 
     // @Mapping(target = "state", expression = "java(\"Jaws\")")

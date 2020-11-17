@@ -1,11 +1,13 @@
 package com.github.ricardocomar.springbootcamunda.orderservice.gateway.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,23 +22,25 @@ public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long id;
+    private Long id;
 
     @Column(unique = true, nullable = false)
-    public String orderId;
+    private String orderId;
 
     @Column(nullable = false)
-    public String customer;
+    private String customer;
 
     @Column(nullable = false)
-    public Double value;
+    private Double value;
 
-    @Embedded
-    public CreditCardEntity card;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private BankSlipEntity bankSlip;
 
-    @Embedded
-    public BankSlipEntity bankSlip;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private CreditCardEntity creditCard;
 
     @Column(nullable = false)
-    public OrderStateEnum state;
+    private OrderStateEnum state;
 }

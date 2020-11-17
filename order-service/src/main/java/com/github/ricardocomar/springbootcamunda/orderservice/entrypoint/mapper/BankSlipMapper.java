@@ -6,10 +6,10 @@ import com.github.ricardocomar.springbootcamunda.orderservice.model.BankSlip;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public abstract class BankSlipMapper {
+public interface BankSlipMapper {
 
-    public abstract BankSlip fromRequest(CreateOrderBankSlip request);
+    public BankSlip fromRequest(CreateOrderBankSlip request);
 
-    public abstract QueryOrderBankSlip fromQuery(BankSlip query);
+    public QueryOrderBankSlip fromQuery(BankSlip query);
 
 }

@@ -1,16 +1,14 @@
 package com.github.ricardocomar.springbootcamunda.orderservice.model;
 
-import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Builder
-public class BankSlip {
+@EqualsAndHashCode(callSuper = true)
+public class BankSlip extends Payment{
 
-    String number;
+    private Double discount;
 
-    LocalDate dueDate;
-
-    Double value;
 }

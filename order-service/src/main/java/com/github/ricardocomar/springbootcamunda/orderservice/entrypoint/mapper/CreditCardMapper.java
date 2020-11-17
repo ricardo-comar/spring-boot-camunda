@@ -6,10 +6,10 @@ import com.github.ricardocomar.springbootcamunda.orderservice.model.CreditCard;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public abstract class CreditCardMapper {
+public interface CreditCardMapper {
 
-    public abstract CreditCard fromRequest(CreateOrderCreditCard card);
+    public CreditCard fromRequest(CreateOrderCreditCard card);
 
-    public abstract QueryOrderCreditCard fromQuery(CreditCard card);
+    public QueryOrderCreditCard fromQuery(CreditCard card);
 
 }

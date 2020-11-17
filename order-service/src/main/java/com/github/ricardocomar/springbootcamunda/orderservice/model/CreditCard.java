@@ -2,16 +2,14 @@ package com.github.ricardocomar.springbootcamunda.orderservice.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Builder
-public class CreditCard {
+@EqualsAndHashCode(callSuper = true)
+public class CreditCard extends Payment{
 
-    String name;
+    private String name;
 
-    String number;
-
-    String expirity;
-
-    String ccv;
+    private String ccv;
 }

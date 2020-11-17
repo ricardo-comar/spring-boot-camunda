@@ -23,7 +23,8 @@ public class BankSlipValidator extends AbstractValidator<CreateOrderBankSlip> {
 
         ruleFor("order.card.dueDate", CreateOrderBankSlip::getDueDate).must(not(nullValue()))
                 .withMessage("Bank Slip Due Date is mandatory").critical()
-                .must(greaterThanOrEqual(LocalDate.now()));
+                .must(greaterThanOrEqual(LocalDate.now()))
+                .withMessage("Bank Slip Due Date must be a future date").critical();
 
         ruleFor("order.card.ccv", CreateOrderBankSlip::getValue).must(not(nullValue()))
                 .withMessage("Bank Slip Value is mandatory").critical().must(greaterThan(0.0))

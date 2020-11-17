@@ -1,28 +1,19 @@
 package com.github.ricardocomar.springbootcamunda.orderservice.gateway.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Embeddable
-public class CreditCardEntity {
+@Entity
+public class CreditCardEntity extends PaymentEntity {
 
-    @Column(nullable = false)
-    String name;
+    private String name;
 
-    @Column(nullable = false)
-    String number;
-
-    @Column(nullable = false)
-    String expirity;
-
-    @Column(nullable = false)
-    String ccv;
+    private String ccv;
 }

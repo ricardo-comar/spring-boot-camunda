@@ -2,15 +2,12 @@ package com.github.ricardocomar.springbootcamunda.orderservice.gateway.mapper;
 
 import com.github.ricardocomar.springbootcamunda.orderservice.gateway.entity.OrderEntity;
 import com.github.ricardocomar.springbootcamunda.orderservice.model.Order;
-import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = {CreditCardEntityMapper.class, BankSlipEntityMapper.class})
-public abstract class OrderEntityMapper {
+public interface OrderEntityMapper {
 
-    // @Mapping(target = "state", expression = "java(\"Jaws\")")
-    public abstract Order fromEntity(OrderEntity entity);
+    public Order fromEntity(OrderEntity entity);
 
-    @InheritInverseConfiguration
-    public abstract OrderEntity fromOrder(Order order);   
+    public OrderEntity fromOrder(Order order);   
 }

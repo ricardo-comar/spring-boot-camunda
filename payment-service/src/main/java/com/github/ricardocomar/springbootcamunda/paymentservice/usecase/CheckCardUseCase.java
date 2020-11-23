@@ -26,6 +26,7 @@ public class CheckCardUseCase {
         Optional<Order> queryOrder = gateway.queryOrder(orderId);
 
         if ((queryOrder.isEmpty()) || (queryOrder.get().getCard() == null)) {
+            LOGGER.error("Order invalid: {}", queryOrder);
             return Boolean.FALSE;
         }
 

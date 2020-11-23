@@ -31,8 +31,8 @@ public class BankSlipValidatorHandler implements ExternalTaskHandler {
 		final Boolean slipValid = useCase.checkBankSlip(orderId);
 
         final Map<String, Object> variables = new HashMap<>();
-        variables.put("slipValid", slipValid);
-        variables.put("slipValidated", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+        variables.put("paymentValid", slipValid);
+        variables.put("paymentValidated", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
 
         externalTaskService.complete(externalTask, variables);
     }

@@ -4,6 +4,7 @@ import com.github.ricardocomar.springbootcamunda.appgateway.gateway.model.Proces
 import com.github.ricardocomar.springbootcamunda.appgateway.gateway.model.ProcessResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import feign.hystrix.FallbackFactory;
@@ -13,8 +14,8 @@ import feign.hystrix.FallbackFactory;
 public interface CamundaFeignClient {
 
     @RequestMapping(method = RequestMethod.POST,
-            value = "/process-definition/key/${processId}/submit-form")
-    ProcessResponse sendRequest(String processId, ProcessRequest request);
+            value = "/process-definition/key/{processId}/submit-form")
+    ProcessResponse sendRequest(@PathVariable(name="processId") String processId, ProcessRequest request);
 
     @Component
     static class FeignClientFallbackFactory

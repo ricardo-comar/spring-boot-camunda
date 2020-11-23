@@ -18,7 +18,7 @@ spring:
     password: camunda
 
 server:
-  port: 8087
+  port: 8082
 
 feign:
   client:
@@ -30,7 +30,7 @@ feign:
       camunda-engine:
         url: ${camunda.engine.url}
       order-service:
-        url: http://localhost:8086
+        url: http://localhost:8081
 
 camunda:
   engine:

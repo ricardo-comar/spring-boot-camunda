@@ -13,7 +13,7 @@ import lombok.Data;
 public abstract class PaymentEntity {
 
     @Id
-    private Long paymendId;
+    private Long paymentId;
 
     private String number;
 

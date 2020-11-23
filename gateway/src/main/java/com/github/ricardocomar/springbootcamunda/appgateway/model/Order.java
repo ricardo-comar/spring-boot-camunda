@@ -17,6 +17,8 @@ public class Order {
 
     public CreditCard card;
 
+    public BankSlip bankSlip;
+
     @With
     public Process process;
 

@@ -31,8 +31,8 @@ public class CardValidatorHandler implements ExternalTaskHandler {
         final Boolean cardValid = useCase.checkCard(orderId);
 
         final Map<String, Object> variables = new HashMap<String, Object>();
-        variables.put("cardValid", cardValid);
-        variables.put("cardValidated", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+        variables.put("paymentValid", cardValid);
+        variables.put("paymentValidated", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
 
         externalTaskService.complete(externalTask, variables);
     }

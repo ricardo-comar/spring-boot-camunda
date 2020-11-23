@@ -7,15 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateOrderCreditCard {
+public class CreateOrderCreditCard extends CreateOrderPayment {
 
-    String name;
+    private String name;
 
-    String number;
-
-    String expirity;
-
-    String ccv;
-
+    private String ccv;
 
 }

@@ -6,7 +6,7 @@ spring:
       enabled: false
 
 server:
-  port: 8085
+  port: 8080
 
 feign:
   client:
@@ -18,4 +18,4 @@ feign:
       camunda-engine:
         url: http://localhost/engine-rest
       order-service:
-        url: http://localhost:8086
+        url: http://localhost:8081

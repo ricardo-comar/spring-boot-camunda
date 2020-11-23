@@ -20,6 +20,7 @@ public class SaveOrderGateway {
     public Order saveOrder(Order order) {
 
         OrderEntity entity = mapper.fromOrder(order);
+        
         repo.saveAndFlush(entity);
 
         return mapper.fromEntity(entity);

@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import java.time.LocalDate;
 import com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.model.CreateOrderBankSlip;
 import com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.model.CreateOrderCreditCard;
 import com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.model.CreateOrderRequest;
@@ -83,7 +82,7 @@ public class OrderRequestValidatorTest {
         CreateOrderRequest order = new CreateOrderRequest();
         order.setCustomer("John Snow");
         order.setValue(123.0);
-        order.setCard(new CreateOrderCreditCard("John Snow", "number", "expirity", "ccv"));
+        order.setCard(new CreateOrderCreditCard("John Snow", "ccv"));
 
         ValidationResult validation = validator.validate(order);
         assertThat(validation.getErrors(), is(empty()));
@@ -95,7 +94,7 @@ public class OrderRequestValidatorTest {
         CreateOrderRequest order = new CreateOrderRequest();
         order.setCustomer("John Snow");
         order.setValue(123.0);
-        CreateOrderBankSlip bankSlip = new CreateOrderBankSlip("123", LocalDate.now().plusWeeks(1), 123.0);
+        CreateOrderBankSlip bankSlip = new CreateOrderBankSlip(123.0);
         order.setBankSlip(bankSlip);
 
         ValidationResult validation = validator.validate(order);

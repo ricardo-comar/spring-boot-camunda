@@ -2,6 +2,7 @@
 
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
 	<springProperty scope="context" name="app_name" source="spring.application.name"/>
+<!--
 
 	<appender name="splunk" class="com.splunk.logging.TcpAppender">
 		<RemoteHost>127.0.0.1</RemoteHost>
@@ -17,10 +18,11 @@
 		</layout>
 	</appender>
 	
+-->
 	<root level="INFO"/>
 	
 	<logger name="com.github.ricardocomar" additivity="false" level="INFO">
- 		<appender-ref ref="splunk" /> 
+ 		<!-- <appender-ref ref="splunk" />  -->
 		<appender-ref ref="CONSOLE" />
 	</logger>
 

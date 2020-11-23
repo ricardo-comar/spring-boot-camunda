@@ -35,7 +35,7 @@ public class OrderRepositoryTest {
         card.setName("JOHN SNOW");
         card.setOrder(order);
         card.setValue(123.0);
-        order.setCreditCard(card);
+        order.setCard(card);
 
         OrderEntity savedOrder = repo.saveAndFlush(order);
         assertNotNull(savedOrder);

@@ -20,6 +20,8 @@ ${execution.getProcessEngineServices().getRuntimeService().createMessageCorrelat
 
 https://dzone.com/articles/spring-boot-and-postgresql
 https://www.baeldung.com/jpa-persisting-enums-in-jpa
+https://www.baeldung.com/hibernate-inheritance
+https://www.baeldung.com/jpa-one-to-one
 
 
 https://www.baeldung.com/spring-cloud-contract

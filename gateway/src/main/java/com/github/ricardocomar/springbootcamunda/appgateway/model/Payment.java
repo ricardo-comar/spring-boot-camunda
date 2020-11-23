@@ -1,5 +1,6 @@
 package com.github.ricardocomar.springbootcamunda.appgateway.model;
 
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BankSlip extends Payment{
+public abstract class Payment {
+    private String number;
 
-        Double discount;
+    private Double value;
+
+    private LocalDate expirity;
+
 }

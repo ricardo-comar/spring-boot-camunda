@@ -4,7 +4,7 @@ import com.github.ricardocomar.springbootcamunda.appgateway.model.Order;
 import com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.model.CreateOrderRequest;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {CreditCardMapper.class})
+@Mapper(componentModel = "spring", uses = {CreditCardMapper.class, BankSlipMapper.class})
 public abstract class OrderMapper {
 
     public abstract CreateOrderRequest fromOrder(Order order);

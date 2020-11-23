@@ -39,7 +39,7 @@ public class OrderController {
     @PostMapping(path = "/order/publish")
     public ResponseEntity<?> publishOrder(@RequestBody(required = true) final OrderRequest body) {
 
-        LOGGER.info("Order received for customer {}", body.getCustomer());
+        LOGGER.info("Order received [{}]", body);
 
         ValidationResult validation = validator.validate(body);
         if (!validation.isValid()) {

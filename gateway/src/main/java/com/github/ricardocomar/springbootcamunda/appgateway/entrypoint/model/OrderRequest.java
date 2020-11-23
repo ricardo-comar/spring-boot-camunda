@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,30 +23,37 @@ public class OrderRequest {
 
     @Data
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class BankSlip {
 
-        String number;
+        Double discount;
+
+        private String number;
+
+        private Double value;
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
         @JsonDeserialize(using = LocalDateDeserializer.class)
         @JsonSerialize(using = LocalDateSerializer.class)
-        LocalDate dueDate;
+        private LocalDate expirity;
 
-        Double value;
     }
 
     @Data
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class CreditCard {
 
-        String name;
+        private String name;
 
-        String number;
+        private String ccv;
 
-        String expirity;
+        private String number;
 
-        String ccv;
+        private Double value;
+
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+        @JsonDeserialize(using = LocalDateDeserializer.class)
+        @JsonSerialize(using = LocalDateSerializer.class)
+        private LocalDate expirity;
     }
+
 }

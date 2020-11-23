@@ -17,13 +17,13 @@ public class BankSlipValidator extends AbstractValidator<BankSlip> {
 
     @Override
     public void rules() {
-        ruleFor("order.bankSlip.number", BankSlip::getNumber)
-                .must(not(stringEmptyOrNull())).withMessage("Bank Slip Number is mandatory")
-                .critical();
+        ruleFor("order.bankSlip.number", BankSlip::getNumber).must(not(stringEmptyOrNull()))
+                .withMessage("Bank Slip Number is mandatory").critical();
 
-        ruleFor("order.card.dueDate", BankSlip::getDueDate).must(not(nullValue()))
+        ruleFor("order.card.dueDate", BankSlip::getExpirity).must(not(nullValue()))
                 .withMessage("Bank Slip Due Date is mandatory").critical()
-                .must(greaterThanOrEqual(LocalDate.now()));
+                .must(greaterThanOrEqual(LocalDate.now()))
+                .withMessage("Bank Slip Due Date must be on the future").critical();
 
         ruleFor("order.card.ccv", BankSlip::getValue).must(not(nullValue()))
                 .withMessage("Bank Slip Value is mandatory").critical().must(greaterThan(0.0))

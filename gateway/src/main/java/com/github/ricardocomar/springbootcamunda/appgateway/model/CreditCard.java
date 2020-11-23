@@ -1,17 +1,15 @@
 package com.github.ricardocomar.springbootcamunda.appgateway.model;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-public class CreditCard {
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreditCard extends Payment {
 
     String name;
-
-    String number;
-
-    String expirity;
 
     String ccv;
 }

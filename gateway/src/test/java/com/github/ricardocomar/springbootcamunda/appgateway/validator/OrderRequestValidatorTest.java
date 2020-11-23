@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import java.time.LocalDate;
 import com.github.ricardocomar.springbootcamunda.appgateway.entrypoint.model.OrderRequest;
 import org.junit.Test;
 import br.com.fluentvalidator.context.ValidationResult;
@@ -69,7 +68,7 @@ public class OrderRequestValidatorTest {
         OrderRequest order = new OrderRequest();
         order.setCustomer("John Snow");
         order.setValue(123.0);
-        order.setCard(new OrderRequest.CreditCard("John Snow", "number", "expirity", "ccv"));
+        order.setCard(new OrderRequest.CreditCard());
 
         ValidationResult validation = validator.validate(order);
         assertThat(validation.getErrors(), is(empty()));
@@ -81,7 +80,7 @@ public class OrderRequestValidatorTest {
         OrderRequest order = new OrderRequest();
         order.setCustomer("John Snow");
         order.setValue(123.0);
-        order.setBankSlip(new OrderRequest.BankSlip("123", LocalDate.now().plusWeeks(1), 123.0));
+        order.setBankSlip(new OrderRequest.BankSlip());
 
         ValidationResult validation = validator.validate(order);
         assertThat(validation.getErrors(), is(empty()));

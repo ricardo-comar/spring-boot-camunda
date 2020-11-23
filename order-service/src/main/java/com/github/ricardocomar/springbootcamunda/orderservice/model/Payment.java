@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public abstract class Payment {
     
-    private Long paymendId;
+    private Long paymentId;
 
     private String number;
 

@@ -1,6 +1,7 @@
 package com.github.ricardocomar.springbootcamunda.orderservice.validator;
 
 import static br.com.fluentvalidator.predicate.LogicalPredicate.not;
+import static br.com.fluentvalidator.predicate.ObjectPredicate.nullValue;
 import static br.com.fluentvalidator.predicate.StringPredicate.stringEmptyOrNull;
 import com.github.ricardocomar.springbootcamunda.orderservice.entrypoint.model.CreateOrderCreditCard;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ public class CreditCardValidator extends AbstractValidator<CreateOrderCreditCard
         ruleFor("order.card.number", CreateOrderCreditCard::getNumber).must(not(stringEmptyOrNull()))
                 .withMessage("Credit Card Number is mandatory").critical();
 
-        ruleFor("order.card.expirity", CreateOrderCreditCard::getExpirity).must(not(stringEmptyOrNull()))
+        ruleFor("order.card.expirity", CreateOrderCreditCard::getExpirity).must(not(nullValue()))
                 .withMessage("Credit Card Expirity is mandatory").critical();
 
         ruleFor("order.card.ccv", CreateOrderCreditCard::getCcv).must(not(stringEmptyOrNull()))

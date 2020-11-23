@@ -19,7 +19,7 @@ spring:
     password: camunda
 
 server:
-  port: 8086
+  port: 8081
 
 feign:
   client:

@@ -22,38 +22,40 @@ public class CamundaGateway {
 
     public Process sendOrder(Order order) {
 
-        Map<String, ProcessVariable> variables =
-                new HashMap<String, ProcessVariable>();
+        Map<String, ProcessVariable> variables = new HashMap<String, ProcessVariable>();
 
         variables.put("correlationId", new ProcessVariable(
                 MDC.get(AppConfiguration.PROP_CORRELATION_ID), String.class.getSimpleName()));
         variables.put("orderId",
                 new ProcessVariable(order.getOrderId(), String.class.getSimpleName()));
-        variables.put("value",
-                new ProcessVariable(order.getValue(), Double.class.getSimpleName()));
-        
+        variables.put("paymentType",
+                new ProcessVariable(
+                        order.getCard() != null ? "CC"
+                                : order.getBankSlip() != null ? "BS" : "Invalid",
+                        String.class.getSimpleName()));
+        variables.put("value", new ProcessVariable(order.getValue(), Double.class.getSimpleName()));
+
         ProcessRequest request = ProcessRequest.builder().variables(variables).build();
 
-        ProcessResponse response = client.sendRequest("Order_Request", request); 
+        ProcessResponse response = client.sendRequest("Order_Request", request);
 
         return Process.builder().processId(response.getId()).build();
     }
 
     public Process sendStockReplace(StockReplace stockReplace) {
 
-        Map<String, ProcessVariable> variables =
-                new HashMap<String, ProcessVariable>();
+        Map<String, ProcessVariable> variables = new HashMap<String, ProcessVariable>();
 
         variables.put("correlationId", new ProcessVariable(
                 MDC.get(AppConfiguration.PROP_CORRELATION_ID), String.class.getSimpleName()));
         variables.put("sku",
                 new ProcessVariable(stockReplace.getSku(), String.class.getSimpleName()));
-        variables.put("value",
+        variables.put("quantity",
                 new ProcessVariable(stockReplace.getQuantity(), Double.class.getSimpleName()));
-        
+
         ProcessRequest request = ProcessRequest.builder().variables(variables).build();
 
-        ProcessResponse response = client.sendRequest("stock-service-process", request); 
+        ProcessResponse response = client.sendRequest("stock-service-process", request);
 
         return Process.builder().processId(response.getId()).build();
     }
